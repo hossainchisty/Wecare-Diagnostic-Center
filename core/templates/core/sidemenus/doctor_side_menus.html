@@ -1,0 +1,16 @@
+<li class="nav-item active">
+    <a class="nav-link collapsed" href="" data-toggle="collapse"
+        data-target="#collapsePagesDoctor" aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-user-md"></i>
+        <span>Doctor</span>
+    </a>
+    <div id="collapsePagesDoctor" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            
+            <a class="collapse-item" href="{% url 'doctor_list' %}">Doctor List</a>
+            <a class="collapse-item" href="{% url 'add_doctor' %}">Add Doctor</a>
+            <a class="collapse-item" href="">Teatment History</a>
+            <a class="collapse-item" href="{% url 'doctor_visit_list' %}">Doctor Visit</a>
+        </div>
+    </div>
+</li>
