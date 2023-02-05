@@ -1,0 +1,16 @@
+<li class="nav-item active">
+    <a class="nav-link " href="" data-toggle="collapse" data-target="#collapsePagesAppointment" aria-expanded="false"
+        aria-controls="collapsePages">
+        <i class="fa fa-calendar-check"></i>
+        <span>Appointment</span></a>
+    </a>
+    <div id="collapsePagesAppointment" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'add_appointment' %}">Add Appointment</a>
+            <a class="collapse-item" href="{% url 'appointment_list' %}">List Appointment</a>
+            <a class="collapse-item" href="{% url 'today_appointment_list' %}">Today Appointment</a>
+            <a class="collapse-item" href="{% url 'upcomming_appointment_list' %}">Upcomming Appointment</a>
+            <a class="collapse-item" href="">Request Appointment</a>
+        </div>
+    </div>
+</li>
