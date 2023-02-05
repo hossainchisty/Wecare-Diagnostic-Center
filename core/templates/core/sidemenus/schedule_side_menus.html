@@ -1,0 +1,14 @@
+<li class="nav-item active">
+    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePagesSchedule"
+        aria-expanded="true" aria-controls="collapsePages">
+         <i class="fas fa-calendar"></i>
+        <span>Schedule</span></a>
+    </a>
+    <div id="collapsePagesSchedule" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'add_schedule' %}">Add Schedule</a>
+            <a class="collapse-item" href="{% url 'schedule_list' %}">Schedule List</a>
+            <a class="collapse-item" href="{% url 'holidays_list' %}">Holidays</a>
+        </div>
+    </div>
+</li>
