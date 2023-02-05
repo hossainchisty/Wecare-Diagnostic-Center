@@ -1,0 +1,13 @@
+<li class="nav-item active">
+    <a class="nav-link " href="" data-toggle="collapse" data-target="#collapsePagesDepartment" aria-expanded="false"
+        aria-controls="collapsePages">
+        <i class="fas fa-sitemap"></i>
+        <span>Department</span></a>
+    </a>
+    <div id="collapsePagesDepartment" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'add_department' %}">Add Department</a>
+            <a class="collapse-item" href="{% url 'department_list' %}">List Department</a>
+        </div>
+    </div>
+</li>
