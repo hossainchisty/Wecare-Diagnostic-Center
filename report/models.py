@@ -11,10 +11,17 @@ from utility.common_fields import BaseModel
 today = date.today()
 
 
+class Reportlist(BaseModel):
+    title = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return str(self.title)
+
+
 class Lab(BaseModel):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     referred_by_doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, verbose_name='Refd By Doctor')
-    title = models.CharField(max_length=30)
+    report_name = models.ForeignKey(Reportlist, on_delete=models.CASCADE, verbose_name='Report Name', default=None)
     report = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     commission = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
@@ -27,7 +34,7 @@ class Lab(BaseModel):
     report_status = models.CharField(max_length=30, choices=STATUS)
 
     def __str__(self) -> str:
-        return self.title
+        return str(self.report_name)
 
     def get_update_url(self):
         return reverse('update_lab',  kwargs={"pk": self.pk})

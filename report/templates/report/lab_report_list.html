@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="pb-3">
-                <a href="">
+                <a href="{% url 'add_lab' %}">
                     <button type="button" class="btn btn-primary">
                         <i class="fa fa-plus"></i>
                         Add Lab Report</button>
@@ -72,7 +72,7 @@
                             <td class="text-center">
                                 <button class="btn-sm">
                                     <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block"
-                                        href="">
+                                        href="{% url 'update_lab' item.id %}">
                                         <i class="fa fa-edit" style="font-size:17px"></i>
                                     </a>
                                 </button>
@@ -84,7 +84,7 @@
                                 </button>
                                 <button class="btn-sm">
                                     <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block"
-                                        data-toggle="modal" data-target="#deleteModal" href="">
+                                        data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_lab' item.id %}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </button>
@@ -95,7 +95,7 @@
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                        <form action="" method="POST">
+                        <form action="{% url 'delete_lab' item.id %}" method="POST">
                             <!-- Security token -->
                             {% csrf_token %}
                             <div class="modal-content">
