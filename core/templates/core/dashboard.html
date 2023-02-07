@@ -1,0 +1,114 @@
+{% extends 'core/_base.html' %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 bg-green-100 opacity-100 p-4">
+        <h4 class="text-gray-800 font-bold text-center">
+            <p id="greeting"></p>
+        </h4>
+
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Total customer -->
+        {% include 'core/components/TotalDoctorCard.html' %}
+        <!-- End -->
+
+        <!-- Total medicine -->
+        {% include 'core/components/TotalPatientCard.html' %}
+        <!-- End -->
+
+        <!-- Out of stock -->
+        {% include 'core/components/AppointmentCard.html' %}
+        <!-- End -->
+
+        <!-- Expired medicine -->
+        {% include 'core/components/LabReportCard.html' %}
+        <!-- End -->
+
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Sales Overview Area Chart Start -->
+        {% include 'core/graph/SalesOverview.html' %}
+        <!-- Sales Overview Area Chart End -->
+
+        <!-- Expense Pie Chart Start -->
+        {% include 'core/graph/ExpenseSummary.html' %}
+        <!-- Expense Pie Chart End -->
+
+        <!-- Today Status - Start -->
+        <div class="flex space-x-4">
+            <div class="justify-between rounded-xl mt-4 p-4 bg-white shadow-lg">
+                <h1 class="text-xl font-bold text-gray-800 mt-4">Today’s Status</h1>
+                <div class="flex justify-between space-x-4 text-center mt-6">
+                    <div class="bg-indigo-50 rounded-xl p-10">
+                        {% comment %} <h3> {% total_balance %}</h3> {% endcomment %}
+                        <h3> 59000</h3>
+                        <span>Total Sales(Tk)</span>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-10">
+                        {% comment %} <h3>{% get_total_purchase %}</h3> {% endcomment %}
+                        <h3>53311</h3>
+                        <span>Total Purchase(Tk)</span>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-10">
+                        {% comment %} <h3>{% get_total_expsense %}</h3> {% endcomment %}
+                        <h3>4211</h3>
+                        <span>Expense Total(Tk)</span>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-10">
+                        <h3>12,30</h3>
+                        <span>Supplier Due(Tk)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--- Top Selling Products Start -->
+            {% include 'core\service\TopSellingProduct.html' %}
+            <!--- Top Selling Products End -->
+   
+        </div>
+        <!-- Today Status - end -->
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+{% include "core/footer.html" %}
+<!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<script type="text/babel">
+    class Greeting extends React.Component {
+        render() {
+            const currentTime = new Date().getHours();
+            return (
+                <>
+                    {% load cache %}
+                    {% cache 700 owner_name %} 👋 Hossain Chisty{% endcache %}, Good{" "}
+                    {currentTime >= 12
+                        ? currentTime >= 16
+                            ? "Evening🌇"
+                            : "Afternoon🌆"
+                        : "Morning​​🌅"}
+                </>
+            );
+        }
+    }
+
+    ReactDOM.render(<Greeting />, document.getElementById("greeting"));
+</script>
+
+{% endblock body %}

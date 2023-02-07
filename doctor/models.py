@@ -4,7 +4,8 @@ from django.db import models
 
 from department.models import Department
 from utility.common_fields import BaseModel
-from utility.unique_uuid import unique_code
+
+# from utility.unique_uuid import unique_code
 
 
 class Doctor(BaseModel):

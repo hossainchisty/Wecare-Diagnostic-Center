@@ -42,7 +42,23 @@ INSTALLED_APPS = [
 ]
 
 # Own Module
-INSTALLED_APPS += ['core.apps.CoreConfig']
+INSTALLED_APPS += [
+    'core.apps.CoreConfig',
+    'appointment.apps.AppointmentConfig',
+    'department.apps.DepartmentConfig',
+    'doctor.apps.DoctorConfig',
+    'patient.apps.PatientConfig',
+    'schedule.apps.ScheduleConfig',
+    'report.apps.ReportConfig',
+
+    # 'profiles.apps.ProfilesConfig',
+    # 'settings.apps.SettingsConfig',
+]
+
+# Third party Module
+INSTALLED_APPS += [
+    'crispy_forms',
+]
 
 
 MIDDLEWARE = [
@@ -112,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Dhaka'
 
 USE_I18N = True
 
@@ -125,7 +141,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-# CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

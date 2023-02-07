@@ -10,5 +10,13 @@ admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls'))
+    path('', include('core.urls')),
+    path('department/', include('department.urls')),
+    path('doctor/', include('doctor.urls')),
+    path('schedule/', include('schedule.urls')),
+    path('patient/', include('patient.urls')),
+    path('appointment/', include('appointment.urls')),
+    path('lab/report/', include('report.urls')),
+    # path('profile', include('profiles.urls')),
+    # path('settings', include('settings.urls'))
 ]

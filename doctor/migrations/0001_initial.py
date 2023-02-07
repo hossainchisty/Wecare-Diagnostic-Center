@@ -10,35 +10,29 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("doctor", "0001_initial"),
+        ("department", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name="Schedule",
+            name="Doctor",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("created_at", models.DateTimeField(default=django.utils.timezone.now, editable=False)),
                 ("updated_at", models.DateTimeField(default=django.utils.timezone.now, editable=False)),
+                ("unique_id", models.CharField(blank=True, editable=False, max_length=10, null=True)),
+                ("name", models.CharField(max_length=30)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("password", models.CharField(max_length=50)),
+                ("phone", models.CharField(max_length=11)),
+                ("designation", models.CharField(max_length=50)),
+                ("commission", models.CharField(blank=True, default="0.00", max_length=4, null=True)),
+                ("total", models.CharField(blank=True, default="0.00", max_length=4, null=True)),
+                ("status", models.BooleanField(default=True)),
                 (
-                    "weekday",
-                    models.CharField(
-                        choices=[
-                            ("friday", "Friday"),
-                            ("saturday", "Saturday"),
-                            ("sunday", "Sunday"),
-                            ("monday", "Monday"),
-                            ("tuesday", "Tuesday"),
-                            ("wednesday", "Wednesday"),
-                            ("thursday", "Thursday"),
-                        ],
-                        max_length=10,
-                    ),
+                    "depertment",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="department.department"),
                 ),
-                ("start_time", models.TimeField()),
-                ("end_time", models.TimeField()),
-                ("appointment_duration", models.CharField(max_length=40)),
-                ("doctor", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="doctor.doctor")),
             ],
             options={
                 "ordering": ["-created_at"],
@@ -46,12 +40,13 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="Holiday",
+            name="DoctorVisit",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
                 ("created_at", models.DateTimeField(default=django.utils.timezone.now, editable=False)),
                 ("updated_at", models.DateTimeField(default=django.utils.timezone.now, editable=False)),
-                ("date", models.DateField()),
+                ("visit_charges", models.DecimalField(blank=True, decimal_places=2, max_digits=5, null=True)),
+                ("status", models.BooleanField(default=True)),
                 ("doctor", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="doctor.doctor")),
             ],
             options={
