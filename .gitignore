@@ -67,7 +67,6 @@ docs/
 Procfile
 .isort.cfg
 setup.py
-requirements/
 db.sqlite3
 .flake8
 
