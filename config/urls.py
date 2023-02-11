@@ -1,5 +1,7 @@
 # flake8: noqa
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
@@ -9,14 +11,18 @@ admin.site.index_title = 'Diagnostic Center Management'
 admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('department/', include('department.urls')),
     path('doctor/', include('doctor.urls')),
     path('schedule/', include('schedule.urls')),
     path('patient/', include('patient.urls')),
     path('appointment/', include('appointment.urls')),
-    path('lab/report/', include('report.urls')),
+    path('lab/report/', include('laboratory.urls')),
+    path('expense/', include('expense.urls')),
+    path('finance/', include('report.urls')),
     # path('profile', include('profiles.urls')),
     # path('settings', include('settings.urls'))
-]
+
+    # Admin Stuff
+    path('admin/', admin.site.urls),
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
