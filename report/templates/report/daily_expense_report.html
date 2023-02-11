@@ -1,0 +1,30 @@
+{% extends 'core/_base.html' %}
+{% block title %} Daily Expense {% endblock title %}
+{% block body %}
+<div class="container-fluid">
+  <!-- Daily Expense Table -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{% now "F" %}, {% now "Y" %} Expense Report</h6>
+    </div>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for items in daily_expense %}
+        <tr>
+          <td>{{ items.date }}</td>
+          <td>${{ items.amount }}</td>
+        </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>
+  <!-- Daily Expense Table -->
+</div>
+{% endblock body %}
