@@ -1,15 +1,14 @@
 # Basic Lib Import
 from django.urls import path
 
-from report.views.add_lab_report_views import CreateLabView
-from report.views.delete_lab_report_views import DeleteLabView
-from report.views.lab_report_list_views import LabReportListView
-from report.views.update_lab_report_views import UpdateLabView
+from report.views.daily_expense_views import DailyExpense
+from report.views.medical_report_views import MedicalReport
+from report.views.monthly_expense_views import MonthlyExpense
 
 # Routing Implement
 urlpatterns = [
-    path('list', LabReportListView.as_view(), name='lab_report_list'),
-    path('add', CreateLabView.as_view(), name='add_lab'),
-    path('update/<int:pk>/', UpdateLabView.as_view(), name='update_lab'),
-    path('delete/<int:pk>/', DeleteLabView.as_view(), name='delete_lab'),
+    # Expense Report
+    path('daily/expense/', DailyExpense.as_view(), name='daily_expense'),
+    path('monthly/expense/', MonthlyExpense.as_view(), name='monthly_expense'),
+    path('medical/report', MedicalReport.as_view(), name='medical_report'),
 ]
