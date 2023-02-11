@@ -7,11 +7,10 @@
     <div id="collapsePagesReport" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="login.html">Today's Report</a>
-            <a class="collapse-item" href="login.html">Today's Customer Report</a>
-            <a class="collapse-item" href="login.html">Expense Report</a>
-            <a class="collapse-item" href="login.html">Purchase Report</a>
-            <a class="collapse-item" href="login.html">Return Report</a>
-            <a class="collapse-item" href="login.html">Sales Report</a>
+            <a class="collapse-item" href="{% url 'medical_report' %}">Medicical Report</a>
+            <a class="collapse-item" href="{% url 'daily_expense' %}">Daily Expense</a>
+            <a class="collapse-item" href="{% url 'monthly_expense' %}">Monthly Expense</a>
+            <a class="collapse-item" href="login.html">Income Vs Expense</a>
         </div>
     </div>
 </li>
