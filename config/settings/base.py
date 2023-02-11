@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 ]
 
 # Own Module
@@ -49,6 +50,8 @@ INSTALLED_APPS += [
     'doctor.apps.DoctorConfig',
     'patient.apps.PatientConfig',
     'schedule.apps.ScheduleConfig',
+    'laboratory.apps.LaboratoryConfig',
+    'expense.apps.ExpenseConfig',
     'report.apps.ReportConfig',
 
     # 'profiles.apps.ProfilesConfig',
@@ -58,6 +61,7 @@ INSTALLED_APPS += [
 # Third party Module
 INSTALLED_APPS += [
     'crispy_forms',
+    'import_export',
 ]
 
 
@@ -99,7 +103,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'diagnostic-db.sqlite3',
     }
 }
 
@@ -142,6 +146,16 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+
+# Maximum size, in bytes, of a request before it will be streamed to the
+# file system instead of into memory.
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440  # i.e. 2.5 MB
+
+# Maximum size in bytes of request data (excluding file uploads) that will be
+# read before a SuspiciousOperation (RequestDataTooBig) is raised.
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440  # i.e. 2.5 MB
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
