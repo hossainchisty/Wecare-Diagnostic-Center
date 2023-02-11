@@ -1,8 +1,15 @@
+# Basic Lib Import
+import datetime
+from datetime import date
+
 from django.db import models
-from utils.models.common_fields import Timestamp
+
+from utility.common_fields import BaseModel
+
+today = date.today()
 
 
-class Category(Timestamp):
+class Category(BaseModel):
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -13,14 +20,21 @@ class Category(Timestamp):
         verbose_name_plural = 'Categories'
 
 
-class Expense(Timestamp):
-    """
-    Expense model for storing expense data🛢
-    """
-    date = models.DateField()
-    expense_type = models.CharField(max_length=100)
+class Expense(BaseModel):
+    """ Expense model for storing expense data """
+    YEAR_CHOICES = [(y, y) for y in range(2000, datetime.date.today().year+1)]
+    MONTH_CHOICE = [(m, m) for m in range(1, 13)]
+
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+    date = models.DateField(default=f'{today}')
+    note = models.CharField(max_length=100, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True, blank=True)
+    year = models.IntegerField(choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+    month = models.IntegerField(choices=MONTH_CHOICE, default=datetime.datetime.now().month)
+
+    class Meta:
+        verbose_name = 'Expense'
+        verbose_name_plural = 'Expenses'
 
     def __str__(self):
-        return f"{self.expense_type} - {self.amount}"
+        return f"{self.date} - {self.amount}"
