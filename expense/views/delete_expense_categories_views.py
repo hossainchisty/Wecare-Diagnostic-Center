@@ -3,12 +3,12 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 
-from expense.models import Expense
+from expense.models import Category
 
 
-class DeleteExpense(DeleteView):
-    model = Expense
-    success_url = reverse_lazy('manage_expense')
+class DeleteExpenseCategories(DeleteView):
+    model = Category
+    success_url = reverse_lazy('expense_category')
 
     def get_object(self, queryset=None):
         obj = super().get_object()

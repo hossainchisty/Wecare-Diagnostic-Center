@@ -3,14 +3,14 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from expense.models import Expense
+from expense.models import Category
 
 
-class UpdateExpense(UpdateView):
-    model = Expense
+class UpdateExpenseCategories(UpdateView):
+    model = Category
     fields = '__all__'
-    template_name = 'expense/expense_form.html'
-    success_url = reverse_lazy('manage_expense')
+    template_name = 'expense/categories_form.html'
+    success_url = reverse_lazy('expense_category')
 
     def get_object(self, queryset=None):
         obj = super().get_object()
