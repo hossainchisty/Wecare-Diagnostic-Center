@@ -32,18 +32,17 @@
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td class="text-center">{{ category.name }}</td>
                             <td class="text-center">
-                                <button>
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" data-toggle="modal" data-target="#deleteModal" href="">
+                                <button class='btn-sm'>
+                                        <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'update_expense_categories' category.id %}">
+                                            <i class="fa fa-edit" style="font-size:17px"></i>
+                                        </a>
+                                </button>
+
+                                <button class='btn-sm'>
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_expense_categories' category.id %}">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
-                                    </button>
-
-                                    <button>
-                                        <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="">
-                                            <i class="fa fa-edit" style="font-size:20px"></i>
-                                        </a>
-                                    </button>
-
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -51,7 +50,7 @@
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                        <form action="" method="post">
+                        <form action="{% url 'delete_expense_categories' category.id %}" method="post">
                             <!-- Security token -->
                             {% csrf_token %}
                             <div class="modal-content">
