@@ -1,5 +1,6 @@
 # Basic Lib Import
 
+from django.db.models import Sum
 from django.shortcuts import redirect, render
 from django.views.generic import View
 
@@ -12,19 +13,20 @@ class CreateLabView(View):
         return render(request,  'report/add_lab_report.html', {'form': LabForm()})
 
     def post(self, request, *args, **kwargs):
-        ''' Create a new Lab '''
+        ''' Create a new Labratory '''
         form = LabForm(request.POST)
         # Automatically set to the currently logged-in user
         # form.instance.user = request.user
         if form.is_valid():
-            value = request.POST.get('report_name')
-            reportPrice = Reportlist.objects.get(id=value)
-            mainBalance = form.instance.total = reportPrice.price
-
-            doctorBalance = mainBalance - form.instance.referred_by_doctor.commission
-            form.instance.referred_by_doctor.total += doctorBalance
+            elements = request.POST.getlist('report_name')
+            print(elements)
+            rawValue = list(map(int, elements))
+            print(rawValue)
+            for item in rawValue:
+                reportPrice = Reportlist.objects.get(id=item)
+                # print(sum(reportPrice.price)) # FIXME: 'decimal.Decimal' object is not iterable
+                print(f'{reportPrice.title} - {reportPrice.price}')
             form.save()
-            print('Add money')
             """Provide a redirect on GET request."""
             return redirect('lab_report_list')
         else:
