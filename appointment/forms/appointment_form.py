@@ -10,7 +10,4 @@ class AppointmentForm(ModelForm):
     ''' Form asking for create appointment '''
     class Meta:
         model = Appointment
-        fields = ['patient', 'doctor', 'date', 'appointment_status', 'visit_charges',  'remarks', 'discount', 'grand_total', 'payment_status']  # noqa
-        widgets = {
-            'date': DateTimeInput(attrs={'type': 'date'}),
-        }
+        fields = ['patient', 'doctor', 'schedule', 'appointment_status', 'visit_charges',  'remarks', 'discount', 'grand_total', 'payment_status'] # noqa
