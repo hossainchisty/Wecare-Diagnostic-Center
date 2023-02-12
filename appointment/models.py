@@ -1,17 +1,16 @@
 # Basic Lib Import
 from django.db import models
-from django.utils import timezone
 
 from doctor.models import Doctor
 from patient.models import Patient
+from schedule.models import Schedule
 from utility.common_fields import BaseModel
 
 
 class Appointment(BaseModel):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField(default=timezone.now, editable=False)
+    schedule = models.ForeignKey(Schedule, on_delete=models.DO_NOTHING, null=True, blank=True)
     STATUS = (
         ('pending confirmation', 'Pending Confirmation'),
         ('confirmed', 'Confirmed'),
