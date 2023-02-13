@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Test Report</title>
+  <style type="text/css">
+    @font-face {
+      font-family: SourceSansPro;
+      src: url(SourceSansPro-Regular.ttf);
+    }
+
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    body {
+      position: relative;
+      width: 70px;
+      margin: 0 auto;
+      color: #555555;
+      background: #FFFFFF;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-family: SourceSansPro;
+    }
+  </style>
+</head>
+
+<body>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          <h1 style="color:red;font-size: 32px">Doctor Clinic </h1>
+        </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th>Chatra,Niamatpur,Naogaon </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th>Tel: +088 01715-441216 </th>
+        <th></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><img height="120px" width="90px"
+            src="https://www.tailorbrands.com/wp-content/uploads/2020/07/mcdonalds-logo.jpg" /> </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th> <br> </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th>LAB REPORT </th>
+        <th></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <hr>
+        </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th> <br> </th>
+        <th></th>
+
+      </tr>
+
+    </thead>
+  </table>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th style="font-size: 12px;text-align: left;">Patient ID : {{ lab.patient.unique_id }}<br> Patient Name : {{ lab.patient }} </th>
+        <th style="font-size: 12px;text-align: left;margin-left:80px;">Lab Report Id : {{ lab.id }}</th>
+      </tr>
+      <tr>
+        <th style="font-size: 12px;text-align: left;">Age: {{ lab.patient.patient_age }}</th>
+        <th style="font-size: 12px;text-align: left;margin-left:80px;">Date : {{ lab.date }}</th>
+      </tr>
+      <tr>
+        <th style="font-size: 12px;text-align: left;">Address : Chatra,Niamatpur,Naogaon</th>
+        <th style="font-size: 12px;text-align: left;margin-left:80px;">Doctor : {{ lab.referred_by_doctor }}</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th> <br> </th>
+        <th></th>
+
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+  </table>
+
+
+  <table border="0" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr style="border-bottom: 1px solid #555555;">
+        <th>#</th>
+        <th>Tests</th>
+        <th> Report </th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr>
+      <td style="font-size: 12px;margin-right:10px">
+          {% if tests %}
+          {% for test in tests %}
+          {{ forloop.counter }} <br>
+          {% endfor %}
+          {% endif %}
+
+        </td>
+        <td style="font-size: 12px;margin-right:10px">
+          {% if tests %}
+          {% for test in tests %}
+          {{ test.title }} <br>
+          {% endfor %}
+          {% endif %}
+
+        </td>
+        <td>{{ lab.report }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+
+    </tbody>
+
+  </table>
+</body>
+
+</html>
