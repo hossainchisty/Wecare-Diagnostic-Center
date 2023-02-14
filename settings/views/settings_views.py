@@ -1,9 +1,10 @@
-import pyshorteners
+# Basic Lib Import
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.decorators.cache import cache_page
+
 from settings.forms.user_settings_form import UserSettingsForm
 
 
@@ -32,16 +33,7 @@ def settings(request):
         messages.success(request, 'Your Settings has been updated. It may take a few moments to update across the site.')
         return redirect('settings')
     else:
-        s = pyshorteners.Shortener()
-
-        # short brand logo url
-        # TODO: AttributeError: 'NoneType' object has no attribute 'url'
-        brand_logo_short = s.tinyurl.short(request.user.brand_logo)
-        defaultURLshort = s.tinyurl.short(request.user.defaultURL)
-
         context = {
-            'form': UserSettingsForm(),
-            'brand_logo_short': brand_logo_short,
-            'defaultURLshort': defaultURLshort
+            'form': UserSettingsForm()
         }
         return render(request, 'settings/settings.html', context)
