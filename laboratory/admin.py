@@ -7,7 +7,7 @@ from laboratory.models import Lab, Reportlist
 
 @admin.register(Reportlist)
 class ReportlistAdmin(ImportExportModelAdmin):
-    list_display = ('title', 'price')
+    list_display = ('title', 'commission', 'price')
 
 
 @admin.register(Lab)
