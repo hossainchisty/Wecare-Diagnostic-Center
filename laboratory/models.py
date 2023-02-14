@@ -13,10 +13,11 @@ today = date.today()
 
 class Reportlist(BaseModel):
     title = models.CharField(max_length=30)
-    price = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
+    commission = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
+    price = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name = 'Lab Report'
+        verbose_name = 'Lab Test'
 
     def __str__(self) -> str:
         return str(self.title)
@@ -35,15 +36,6 @@ class Lab(BaseModel):
         ('delivered', 'Delivered'),
     )
     report_status = models.CharField(max_length=30, choices=STATUS)
-
-    # def save(self, *args, **kwargs):
-    #     ''' Report price calculation '''
-    #     divideCommission = self.total - self.referred_by_doctor.commission
-    #     print(f'{divideCommission=}')
-    #     self.referred_by_doctor.total += divideCommission
-    #     print(self.referred_by_doctor.total)
-
-    #     super(Lab, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return str(self.report_status)
