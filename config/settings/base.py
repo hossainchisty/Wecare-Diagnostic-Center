@@ -45,14 +45,16 @@ INSTALLED_APPS = [
 # Own Module
 INSTALLED_APPS += [
     'core.apps.CoreConfig',
-    'appointment.apps.AppointmentConfig',
-    'department.apps.DepartmentConfig',
     'doctor.apps.DoctorConfig',
     'patient.apps.PatientConfig',
     'schedule.apps.ScheduleConfig',
-    'laboratory.apps.LaboratoryConfig',
     'expense.apps.ExpenseConfig',
     'report.apps.ReportConfig',
+    'income.apps.IncomeConfig',
+    'laboratory.apps.LaboratoryConfig',
+    'department.apps.DepartmentConfig',
+    'appointment.apps.AppointmentConfig',
+    'authenticator.apps.AuthenticatorConfig',
 
     # 'profiles.apps.ProfilesConfig',
     # 'settings.apps.SettingsConfig',
@@ -147,6 +149,11 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+# Authentication URLs
+LOGIN_URL = 'sign-in'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'sign-out'
+LOGOUT_REDIRECT_URL = 'sign-in'
 
 # Maximum size, in bytes, of a request before it will be streamed to the
 # file system instead of into memory.
