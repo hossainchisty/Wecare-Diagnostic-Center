@@ -25,6 +25,5 @@ class MakeAppointmentConfirmedView(View):
             ''' Calculate total doctor amount '''
             amount = getID.doctor.total
             total_amount = amount + getID.visit_charges
-            print(f'Total: {total_amount}')
             Doctor.objects.update(total=total_amount)
             return HttpResponseRedirect(reverse('appointment_list'))
