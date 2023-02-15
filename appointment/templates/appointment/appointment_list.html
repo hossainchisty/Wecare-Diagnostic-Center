@@ -52,7 +52,8 @@
                             <th class="text-center">SL.</th>
                             <th class="text-center">Patient</th>
                             <th class="text-center">Doctor</th>
-                            <th class="text-center">Date-Time</th>
+                            <th class="text-center">Start Time - End Time</th>
+                            <th class="text-center">Duration</th>
                             <th class="text-center">Bill Status</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
@@ -64,25 +65,54 @@
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td class="text-center">{{ item.patient.name }}</td>
                             <td class="text-center">{{ item.doctor.name }}</td>
-                            <td class="text-center">{{ item.date }}-{{ item.time }}</td>
+                            <td class="text-center">{{ item.schedule.start_time }} - {{ item.schedule.end_time }}</td>
+                            <td class="text-center">{{ item.schedule.appointment_duration }}</td>
                              {% if item.payment_status == 'paid' %}
                             <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-400 text-white rounded-full">{{ item.payment_status|title }}</span></td>
                             {% else %}
-                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-400 text-white rounded-full">{{ item.payment_status|title }}</span></td>
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-400 text-white rounded-full">{{ item.payment_status|title }}</span></td>
                             {% endif %}
-                            <td class="text-center">{{ item.appointment_status|title }}</td>
+
+                            {% if item.appointment_status == 'pending confirmation' %}
                             <td class="text-center">
+                                <span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-400 text-white rounded-full">{{ item.appointment_status|title }} 
+                               </span>
+                            </td>
+                            {% elif item.appointment_status == 'confirmed' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-400 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            {% elif item.appointment_status == 'treated' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-900 text-white rounded-full">{{ item.appointment_status|title }}</span></td> 
+                            {% elif item.appointment_status == 'cancelled' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-500 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            
+                            {% elif item.appointment_status == 'requested' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-500 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            {% endif %}
+                            <td class="text-center">
+                                <button class="btn-sm">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'confirmed_appointment' item.id %}">
+                                        <i class="fa fa-check" style="font-size:15px"></i>
+                                    </a>
+                                </button>
+
+                                <button class="btn-sm">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" href="{% url 'cancle_appointment' item.id %}">
+                                        <i class="fa fa-times" style="font-size:15px"></i>
+                                    </a>
+                                </button>
+                                
+                                <button class="btn-sm">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'update_appointment' item.id %}">
+                                        <i class="fa fa-edit" style="font-size:15px"></i>
+                                    </a>
+                                </button>
+
                                 <button class="btn-sm">
                                     <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_appointment' item.id %}">
                                         <i class="fas fa-trash-alt" style="font-size:15px"></i>
                                     </a>
                                 </button>
 
-                                <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'update_appointment' item.id %}">
-                                        <i class="fa fa-edit" style="font-size:15px"></i>
-                                    </a>
-                                </button>
                             </td>
                         </tr>
                     </tbody>

@@ -17,7 +17,7 @@ class Doctor(BaseModel):
     designation = models.CharField(max_length=50)
     depertment = models.ForeignKey(Department, on_delete=models.CASCADE)
     commission = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
-    total = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
+    total = models.DecimalField(max_digits=15, decimal_places=2,  default=0.00)
     status = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):

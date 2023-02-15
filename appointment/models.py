@@ -10,7 +10,7 @@ from utility.common_fields import BaseModel
 class Appointment(BaseModel):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    schedule = models.ForeignKey(Schedule, on_delete=models.DO_NOTHING, null=True, blank=True)
+    schedule = models.ForeignKey(Schedule, on_delete=models.DO_NOTHING)
     STATUS = (
         ('pending confirmation', 'Pending Confirmation'),
         ('confirmed', 'Confirmed'),
@@ -22,7 +22,6 @@ class Appointment(BaseModel):
     visti_description = models.TextField()
     visit_charges = models.DecimalField(max_digits=5, decimal_places=2)
     discount = models.IntegerField(null=True, blank=True)
-    grand_total = models.DecimalField(max_digits=5, decimal_places=2)
     PAYMENT_TYPE = (
         ('cash', 'Cash'),
         ('card', 'Card')
@@ -32,7 +31,7 @@ class Appointment(BaseModel):
         ('paid', 'Paid'),
         ('unpaid', 'Unpaid')
     )
-    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS)
+    payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS, default='unpaid')
     remarks = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
