@@ -28,7 +28,7 @@ class Lab(BaseModel):
     referred_by_doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, verbose_name='Refd By Doctor')
     report_name = models.ManyToManyField(Reportlist, verbose_name='Report Name', help_text='Hold down “Control”, or “Command” on a Mac, to select more than one.') # noqa
     report = models.TextField()
-    total = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True, default=0.00)
+    total = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True, default=0.00)
     date = models.DateField(default=f'{today}')
     STATUS = (
         ('sample', 'Sample Collected'),
