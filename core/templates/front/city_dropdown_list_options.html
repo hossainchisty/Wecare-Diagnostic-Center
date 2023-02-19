@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for schedules in schedules %}
+<option value="{{ schedules.pk }}">{{ schedules.weekday }} {{ schedules.start_time }}</option>
+{% endfor %}
