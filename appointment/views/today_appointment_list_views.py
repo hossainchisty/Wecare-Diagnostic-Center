@@ -13,7 +13,7 @@ class TodayAppointmentListView(View):
     def get(self, request):
         ''' This will reutrn list of today appointment '''
         today = date.today()
-        today_list = Appointment.objects.filter(date__contains=today)
+        today_list = Appointment.objects.filter(created_at__contains=today)
         paginator = Paginator(today_list, 10)
         page_number = request.GET.get('page')
 
