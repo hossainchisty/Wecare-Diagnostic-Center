@@ -21,8 +21,7 @@ urlpatterns = [
     path('expense/', include('expense.urls')),
     path('finance/', include('report.urls')),
     path('auth/', include('authenticator.urls')),
-    # path('settings', include('settings.urls')),
-    # path('profile', include('profiles.urls')),
+    path('front/', include('frontapp.urls')),
 
     # Admin Stuff
     path('admin/', admin.site.urls),
