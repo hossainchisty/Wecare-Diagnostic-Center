@@ -19,7 +19,7 @@ urlpatterns = [
     path('appointment/', include('appointment.urls')),
     path('lab/report/', include('laboratory.urls')),
     path('expense/', include('expense.urls')),
-    path('finance/', include('report.urls')),
+    path('report/', include('report.urls')),
     path('auth/', include('authenticator.urls')),
     path('front/', include('frontapp.urls')),
 
