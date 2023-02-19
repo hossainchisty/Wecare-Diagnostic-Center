@@ -11,7 +11,7 @@ class DoctorVisit(BaseModel):
     """ DoctorVisit model for storing doctor visits charges data """
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
-    visit_charges = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
+    visit_charges = models.DecimalField(max_digits=10, decimal_places=2,  default=0.00)
     status = models.BooleanField(default=True)
 
     class Meta:
