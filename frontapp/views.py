@@ -58,7 +58,7 @@ class Appointment(View):
         phone = request.POST.get('phone')
         age = request.POST.get('age')
         doctor = request.POST.get('doctor')
-        unique_id = f'{unique_code(6)}'
+        unique_id = f'cddc23-{unique_code(6)}'
 
         doctorID = Doctor.objects.get(id=doctor)
 
