@@ -19,8 +19,6 @@ class Appointment(BaseModel):
         ('requested', 'Requested'),
     )
     appointment_status = models.CharField(max_length=40, choices=STATUS, default='pending confirmation')
-    visti_description = models.TextField()
-    visit_charges = models.DecimalField(max_digits=5, decimal_places=2)
     discount = models.IntegerField(null=True, blank=True)
     PAYMENT_TYPE = (
         ('cash', 'Cash'),
