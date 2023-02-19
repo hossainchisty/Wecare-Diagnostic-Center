@@ -21,6 +21,7 @@ class Schedule(BaseModel):
     start_time = models.TimeField()
     end_time = models.TimeField()
     appointment_duration = models.CharField(max_length=40)
+    visit_charges = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     def get_update_url(self):
         return reverse('update_schedule',  kwargs={"pk": self.pk})
