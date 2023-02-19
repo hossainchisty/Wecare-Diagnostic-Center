@@ -10,5 +10,5 @@ from appointment.models import Appointment
 class MakeAppointmentCancelView(View):
     def get(self, request, id):
         ''' This will cancel an appointment '''
-        Appointment.objects.filter(id=id).update(appointment_status='cancelled')
+        Appointment.objects.filter(id=id).update(appointment_status='cancelled', payment_status='unpaid')
         return HttpResponseRedirect(reverse('appointment_list'))
