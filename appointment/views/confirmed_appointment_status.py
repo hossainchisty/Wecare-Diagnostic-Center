@@ -18,13 +18,12 @@ class MakeAppointmentConfirmedView(View):
         doctorConfirmed = DoctorVisit.objects.create(
             doctor=getID.doctor,
             appointment=getID,
-            visit_charges=getID.visit_charges,
+            visit_charges=getID.schedule.visit_charges,
         )
         doctorConfirmed.save()
         with transaction.atomic():
             ''' Calculate total doctor amount '''
             amount = getID.doctor.total
-            total_amount = amount + getID.visit_charges
-            print(f'Total: {total_amount}')
-            Doctor.objects.update(total=total_amount)
+            total_amount = amount + getID.schedule.visit_charges
+            Doctor.objects.filter(id=getID.doctor.id).update(total=total_amount)
             return HttpResponseRedirect(reverse('appointment_list'))
