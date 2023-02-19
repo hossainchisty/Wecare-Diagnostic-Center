@@ -1,0 +1,45 @@
+{% extends 'core/_base.html' %}
+{% block title %} Financial Report {% endblock title %}
+{% block body %}
+<div class="container-fluid">
+    <!-- Financial Report Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Financial Report</h6>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-dark text-bold">Income</th>
+                    <th scope="col" class="text-dark text-bold">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Gross Income</th>
+                    <td>{{ gross_income }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Total Doctors Amount</th>
+                    <td>{{ doctor_profit }} </td>
+                </tr>
+            </tbody>
+
+            <thead>
+                <tr>
+                    <th scope="col" class="text-dark text-bold">Expense</th>
+                    <th scope="col" class="text-dark text-bold">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Total</th>
+                    <td>{{ total_expense }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- Financial Report Table -->
+</div>
+{% endblock body %}
