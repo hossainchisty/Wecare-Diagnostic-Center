@@ -12,7 +12,7 @@ class DoctorProfit(BaseModel):
     """ DoctorProfit model for storing doctor profits data """
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     lab = models.ForeignKey(Lab, on_delete=models.CASCADE)
-    profit = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
+    profit = models.DecimalField(max_digits=10, decimal_places=2,  default=0.00)
 
     class Meta:
         verbose_name = 'Doctor Profit'
