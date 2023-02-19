@@ -42,7 +42,8 @@ class CreateLabView(View):
             ''' Adding diagnostic total profit from tests '''
             addDiagnosticAmount = DiagnosticIncome.objects.create(
                 amount=diagnosticProfit,
-                sources='Earning from lab tests',
+                description=f'The revenue estimated was {diagnosticProfit} Taka.',
+                sources='The revenue generated from clinical laboratory services.',
             )
             addDiagnosticAmount.save()
             ''' Adding doctor total profit from commission '''
