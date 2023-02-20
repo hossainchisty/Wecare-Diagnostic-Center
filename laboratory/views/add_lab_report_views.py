@@ -5,6 +5,7 @@ from django.db import transaction
 from django.shortcuts import redirect, render
 from django.views.generic import View
 
+from doctor.models.doctor_model import Doctor
 from doctor.models.doctor_profit_model import DoctorProfit
 from income.models import DiagnosticIncome
 from laboratory.forms.lab_form import LabForm
@@ -53,6 +54,10 @@ class CreateLabView(View):
                         profit=totalProfitAmount
                         )
             addProfit.save()
+            ''' Tracking doctor total amounts '''
+            doctor = Doctor.objects.get(id=addProfit.doctor.id)
+            total_amount = totalProfitAmount + doctor.total
+            Doctor.objects.filter(id=addProfit.doctor.id).update(total=total_amount)
             """Provide a redirect on GET request."""
             return redirect('lab_report_list')
         else:
