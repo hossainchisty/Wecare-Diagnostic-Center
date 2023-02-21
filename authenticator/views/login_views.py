@@ -1,20 +1,21 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+
+from authenticator.models import User
 
 
 def SignInView(request):
     ''' Sign in views '''
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = User.objects.filter(username=username).first()
+        user = User.objects.filter(email=email).first()
         if user is None:
-            messages.info(request, '%s Not found!' % username)
+            messages.info(request, '%s Not found!' % email)
             return redirect('sign-in')
-        auth_user = authenticate(username=username, password=password)
+        auth_user = authenticate(email=email, password=password)
         if auth_user is None:
             messages.info(request, 'Wrong credentials')
             return redirect('sign-in')
