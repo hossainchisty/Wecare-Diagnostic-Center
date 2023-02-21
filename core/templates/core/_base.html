@@ -92,7 +92,7 @@
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-hospital"></i>
           </div>
-          <div class="sidebar-brand-text mx-3 font-weight-bolder text-monospace">Diagnostic<sup></sup></div>
+          <div class="sidebar-brand-text mx-3 font-weight-bolder text-monospace">{{ request.user.title }}<sup></sup></div>
         </a>
 
         <!-- Divider -->
@@ -105,7 +105,6 @@
             <span>Dashboard</span></a
           >
         </li>
-
 
         <!-- Depertment menus start -->
         {% include 'core/sidemenus/department_side_menus.html' %}
@@ -139,35 +138,9 @@
         {% include 'core/sidemenus/financial_side_menus.html' %}
         <!-- Financial menus end -->
 
-        {% comment %} <!-- Purchase menus start -->
-        {% include 'core/sidemenus/purchase_side_menus.html' %}
-        <!-- Purchase menus end -->
-
-        <!-- Invoice menus start -->
-        {% include 'core/sidemenus/invoice_side_menus.html' %}
-        <!-- Invoice menus end -->
-
-        <!-- Return menus start -->
-        {% include 'core/sidemenus/return_side_menus.html' %}
-        <!-- Return menus end -->
-
-        <!-- Stock menus start -->
-        {% include 'core/sidemenus/stock_side_menus.html' %}
-        <!-- Stock menus end -->
-
-
-
-        <!-- Sale menus start -->
-        {% include 'core/sidemenus/sale_side_menus.html' %}
-        <!-- Sale menus end --> {% endcomment %}
-
-
-
         <!-- Report menus start -->
         {% include 'core/sidemenus/report_side_menus.html' %}
         <!-- Report menus end -->
-
-
 
         <!-- Settings menus start -->
         {% include 'core/sidemenus/setting_side_menus.html' %}
@@ -209,7 +182,7 @@
 
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
-                {% comment %} {% cache 700 nav_info %} {% endcomment %}
+               
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
@@ -220,21 +193,17 @@
                   aria-expanded="false"
                 >
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    {{ request.user.organization_name }}
-                    Diagnostic Center
+                    {{ request.user.title }}
                   </span>
-                  {% comment %} {% if request.user.brand_logo.url  %}
+                   {% if request.user.hospitial_logo  %}
                     <img
                         class="img-profile rounded-circle"
-                        src="{{ request.user.brand_logo.url }}"
+                        src="{{ request.user.hospitial_logo.url }}"
                       />
                   {% else %}
-                    <img class="img-profile rounded-circle" src="{{ request.user.defaultURL }}">
-                  {% endif %} {% endcomment %}
-                    <img class="img-profile rounded-circle" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/1/0/e/10e6c0a439e17280a6f3fa6ae059819af5517efd.png">
-
+                    <img class="img-profile rounded-circle" src="https://img.freepik.com/free-vector/hospital-logo-design-vector-medical-cross_53876-136743.jpg?w=2000">
+                  {% endif %}
                 </a>
-                {% comment %} {% endcache %} {% endcomment %}
                 <!-- Dropdown - User Information -->
                 <div
                   class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

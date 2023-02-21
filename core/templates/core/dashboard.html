@@ -68,11 +68,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--- Top Selling Products Start -->
-            {% include 'core\service\TopSellingProduct.html' %}
-            <!--- Top Selling Products End -->
-   
         </div>
         <!-- Today Status - end -->
 <!-- /.container-fluid -->
@@ -96,8 +91,7 @@
             const currentTime = new Date().getHours();
             return (
                 <>
-                    {% load cache %}
-                    {% cache 700 owner_name %} 👋 Hossain Chisty{% endcache %}, Good{" "}
+                    👋 {{ request.user.title }}, Good{" "}
                     {currentTime >= 12
                         ? currentTime >= 16
                             ? "Evening🌇"
