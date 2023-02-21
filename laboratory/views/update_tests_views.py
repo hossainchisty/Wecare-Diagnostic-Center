@@ -3,7 +3,7 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 
-from laboratory.models import Reportlist
+from laboratory.models.reports_models import Reportlist
 
 
 class UpdateTest(UpdateView):

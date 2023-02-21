@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views.generic import View
 
-from laboratory.models import Lab
+from laboratory.models.lab_models import Lab
 from utility.render_to_pdf import generate_pdf
 
 

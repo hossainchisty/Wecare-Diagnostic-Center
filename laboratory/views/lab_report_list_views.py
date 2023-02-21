@@ -4,7 +4,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 from django.views.generic import View
 
-from laboratory.models import Lab
+from laboratory.models.lab_models import Lab
 
 
 class LabReportListView(View):

@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from laboratory.models import Lab
+from laboratory.models.lab_models import Lab
 from utility.common_fields import BaseModel
 
 from .doctor_model import Doctor
