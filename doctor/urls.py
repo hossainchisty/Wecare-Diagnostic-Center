@@ -10,6 +10,8 @@ from doctor.views.doctor_visit_list import DoctorVisitListView
 from doctor.views.holiday_history_views import DoctorholidayListView
 from doctor.views.update_doctor_views import UpdateDoctor
 from doctor.views.update_doctor_visit_views import UpdateDoctorVisit
+from doctor.views.doctor_details_views import DoctorDetailsView
+
 
 # Routing Implement
 urlpatterns = [
@@ -19,7 +21,10 @@ urlpatterns = [
     path('update/<int:pk>/', UpdateDoctor.as_view(), name='update_doctor'),
     path('update/visit/<int:pk>/', UpdateDoctorVisit.as_view(), name='update_doctor_visit'),
     path('schedule/holidays/<int:doctor_id>/', DoctorholidayListView.as_view(), name='doctor_holiday_list'),
-    path('delete/<pk>', DeleteDoctor.as_view(), name='delete_doctor'),
+    path('delete/<int:pk>', DeleteDoctor.as_view(), name='delete_doctor'),
     path('visit/list', DoctorVisitListView.as_view(), name='doctor_visit_list'),
-    path('delete/visit/<pk>', DeleteDoctorVisit.as_view(), name='delete_doctor_visit'),
+    path('delete/visit/<int:pk>', DeleteDoctorVisit.as_view(), name='delete_doctor_visit'),
+
+
+    path('details/<int:detail_id>', DoctorDetailsView, name='doctor_details'),
 ]
