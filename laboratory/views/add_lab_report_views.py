@@ -9,7 +9,7 @@ from doctor.models.doctor_model import Doctor
 from doctor.models.doctor_profit_model import DoctorProfit
 from income.models import DiagnosticIncome
 from laboratory.forms.lab_form import LabForm
-from laboratory.models import Reportlist
+from laboratory.models.reports_models import Reportlist
 
 
 class CreateLabView(View):

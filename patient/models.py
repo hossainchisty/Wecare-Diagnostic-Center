@@ -3,7 +3,6 @@ from django.db import models
 
 from doctor.models import Doctor
 from utility.common_fields import BaseModel
-from utility.unique_uuid import unique_code
 
 
 class Patient(BaseModel):
@@ -35,11 +34,6 @@ class Patient(BaseModel):
     total_deposit = models.DecimalField(max_digits=5, decimal_places=2, default='0.00', null=True, blank=True)
     due = models.DecimalField(max_digits=5, decimal_places=2, default='0.00', null=True, blank=True)
     status = models.BooleanField(default=True)
-
-    def save(self, *args, **kwargs):
-        ''' unique code generator '''
-        # self.unique_id = f'cddc23-{unique_code(6)}'
-        super(Patient, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
