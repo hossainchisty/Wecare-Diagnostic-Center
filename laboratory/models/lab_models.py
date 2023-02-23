@@ -20,9 +20,17 @@ class Lab(BaseModel):
         ('delivered', 'Delivered'),
     )
     report_status = models.CharField(max_length=30, choices=STATUS, default='sample')
+    duration = models.DateTimeField(help_text='Report Delivery Date-Time', null=True, blank=True)
+    note = models.CharField(max_length=60, null=True, blank=True)
 
     def __str__(self) -> str:
         return str(self.report_status)
+
+    def save(self):
+        date = self.duration.date()
+        time = self.duration.time()
+        self.note = f'Report Delivery Date: {date} Delivery Time: {time}'
+        return super().save()
 
     def get_update_url(self):
         return reverse('update_lab',  kwargs={"pk": self.pk})
