@@ -11,6 +11,7 @@ from doctor.views.holiday_history_views import DoctorholidayListView
 from doctor.views.update_doctor_views import UpdateDoctor
 from doctor.views.update_doctor_visit_views import UpdateDoctorVisit
 from doctor.views.doctor_details_views import DoctorDetailsView
+from doctor.views.doctor_password_change import ChangePassword
 
 
 # Routing Implement
@@ -27,4 +28,5 @@ urlpatterns = [
 
 
     path('details/<int:detail_id>', DoctorDetailsView, name='doctor_details'),
+    path('change/password/<str:doctor_id>', ChangePassword.as_view(), name='change_doctor_password')
 ]

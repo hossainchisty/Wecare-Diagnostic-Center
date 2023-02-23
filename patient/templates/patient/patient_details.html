@@ -1,0 +1,210 @@
+{% extends 'core/_base.html' %}
+{% block title %} Patient Details {% endblock title %}
+{% block body %}
+<div class="container-fluid">
+	<div class="main-body">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex flex-column align-items-center text-center">
+							{% comment %} <img src="{{ data.avatar.url }}" alt="Admin" class="rounded-circle p-1"
+								width="110"> {% endcomment %}
+							<div class="mt-5">
+								<h4 class="text-black">{{ data.name }} <p class="text-sm"> (UHID: {{ data.unique_id }})
+									</p>
+								</h4>
+							</div>
+						</div>
+						<hr class="my-4">
+						<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+							<h6 class="mb-0 text-black">
+								Age/Gender
+							</h6>
+							<span class="text-black">
+								{{ data.patient_age }} Y/{% if data.gender == 'male' %}M
+								{% else %}
+								F
+								{% endif %}
+							</span>
+						</li>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+								<h6 class="mb-0 text-black">
+									Cell
+								</h6>
+								<span class="text-black">{{ data.phone }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+								<h6 class="mb-0 text-black">
+									Email
+								</h6>
+								<span class="text-black">{{ data.email }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+								<h6 class="mb-0 text-black">
+									Blood
+								</h6>
+								<span class="text-black">{{ data.blood_group | title }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+								<h6 class="mb-0 text-black">
+									DOB
+								</h6>
+								<span class="text-black">{{ data.date_of_birth }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+								<h6 class="mb-0 text-black">
+									Registerd
+								</h6>
+								<span class="text-black">{{ data.created_at }}</span>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- Total due -->
+			<div class="col-lg-8">
+				<div class="card">
+					<div class="card-body">
+						<!-- Main container start -->
+						<div class="container">
+							<div class="row">
+								<!-- start -->
+								<div class="col-sm">
+									<div class="card border-left-warning shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div class="text-xs font-weight-bold text-uppercase mb-1">
+														<a class="text-warning hover:no-underline" href="">Total Bill
+														</a>
+													</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">
+														{{ data.total_bill }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- end -->
+								<!-- start -->
+								<div class="col-sm">
+									<div class="card border-left-danger shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div class="text-xs font-weight-bold text-uppercase mb-1">
+														<a class="text-danger hover:no-underline" href="">Total Due
+														</a>
+													</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">
+														{{ data.due }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- end -->
+								<!-- start -->
+								<div class="col-sm">
+									<div class="card border-left-primary shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div class="text-xs font-weight-bold text-uppercase mb-1">
+														<a class="text-primary hover:no-underline" href="">Total Deposit
+														</a>
+													</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">
+														{{ data.total_deposit }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- end -->
+							</div>
+						</div>
+						<!-- Main container end -->
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="card">
+							<div class="card-body">
+								<!-- Form code begins -->
+								<form method="post">
+									<div class="form-group">
+										<!-- Date input -->
+										<label class="m-2">Date From</label>
+										<input type="date" class="form-control" name="date_from" type="date">
+										<label class="m-2">Date To</label>
+										<input type="date" class="form-control" name="date_to" type="date">
+										<!-- Submit button -->
+										<button class="btn btn-primary m-1" name="submit" type="submit">Submit</button>
+									</div>
+								</form>
+								<!-- Form code ends -->
+								<hr>
+								<h5 class="d-flex align-items-center">Statistic</h5>
+								<!-- Patient testsed lists start -->
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th scope="col">SN</th>
+											<th scope="col">Particulars</th>
+											<th scope="col">QTY</th>
+											<th scope="col">Amount</th>
+											<th scope="col">Invoice Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">
+											{% if tests %}
+											{% for test in tests %}
+											{{ forloop.counter }} <br>
+											{% endfor %}
+											{% endif %}
+											</th>
+											<td>
+												{% if tests %}
+          {% for test in tests %}
+          {{ test.title }} <br>
+          {% endfor %}
+          {% endif %}
+
+											</td>
+											<td>1</td>
+											<td>
+												{% if tests %}
+          {% for test in tests %}
+          {{ test.price }} <br>
+          {% endfor %}
+          {% endif %}
+
+											</td>
+											<td>{{ lab.created_at }}</td>
+										</tr>
+									</tbody>
+								</table>
+								<!-- Patient testsed lists end -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}
