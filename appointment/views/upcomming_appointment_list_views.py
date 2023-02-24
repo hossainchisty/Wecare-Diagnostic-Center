@@ -13,7 +13,7 @@ class UpcommingAppointmentListView(View):
     def get(self, request):
         ''' This will reutrn list of upcomming appointments '''
         # Get today's date from last 7 days
-        upcomming_appointments = Appointment.objects.filter(date__gte=datetime.now()-timedelta(days=7))
+        upcomming_appointments = Appointment.objects.filter(created_at__gte=datetime.now()-timedelta(days=7))
         paginator = Paginator(upcomming_appointments, 10)
         page_number = request.GET.get('page')
 
