@@ -5,9 +5,9 @@ from django.views.generic import View
 
 
 @method_decorator(login_required, name='dispatch')
-class ExpiredMedicine(View):
+class AppointmentNotify(View):
     def get(self, request):
-        return render(request, 'core/alerts/expired_medicine.html')
+        return render(request, 'core/alerts/appointment_notification.html')
 
 
 @method_decorator(login_required, name='dispatch')
