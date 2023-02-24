@@ -1,17 +1,11 @@
 # Basic Lib Import
-# from django.core.exceptions import PermissionDenied
-from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
+from django.shortcuts import redirect
 
 from laboratory.models import Reportlist
 
 
-class DeleteLabTestView(DeleteView):
-    model = Reportlist
-    success_url = reverse_lazy('lab_tests_list')
-
-    def get_object(self, queryset=None):
-        obj = super().get_object()
-        # if obj.user != self.request.user:
-        #     raise PermissionDenied("You are not allowed to delete this expense.")
-        return obj
+def DeleteLabTestView(request, pk):
+    if request.method == "POST":
+        tests = Reportlist.objects.get(id=pk)
+        tests.delete()
+        return redirect('lab_tests_list')
