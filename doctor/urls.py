@@ -22,7 +22,7 @@ urlpatterns = [
     path('update/<int:pk>/', UpdateDoctor.as_view(), name='update_doctor'),
     path('update/visit/<int:pk>/', UpdateDoctorVisit.as_view(), name='update_doctor_visit'),
     path('schedule/holidays/<int:doctor_id>/', DoctorholidayListView.as_view(), name='doctor_holiday_list'),
-    path('delete/<int:pk>', DeleteDoctor.as_view(), name='delete_doctor'),
+    path('delete/<int:pk>', DeleteDoctor, name='delete_doctor'),
     path('visit/list', DoctorVisitListView.as_view(), name='doctor_visit_list'),
     path('delete/visit/<int:pk>', DeleteDoctorVisit.as_view(), name='delete_doctor_visit'),
 
