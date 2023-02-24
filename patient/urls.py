@@ -12,6 +12,6 @@ urlpatterns = [
     path('list', PatientListView.as_view(), name='patient_list'),
     path('add', CreatePatientView.as_view(), name='add_patient'),
     path('update/<int:pk>/', UpdatePatient.as_view(), name='update_patient'),
-    path('delete/<int:pk>/', DeletePatient.as_view(), name='delete_patient'),
+    path('delete/<int:pk>/', DeletePatient, name='delete_patient'),
     path('details/<str:id>/<str:uhid>/', PatientDetailsView, name='patient_details'),
 ]

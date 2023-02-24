@@ -1,18 +1,11 @@
 # Basic Lib Import
 
-# from django.core.exceptions import PermissionDenied
-from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
-
+from django.shortcuts import redirect
 from patient.models import Patient
 
 
-class DeletePatient(DeleteView):
-    model = Patient
-    success_url = reverse_lazy('patient_list')
-
-    def get_object(self, queryset=None):
-        obj = super().get_object()
-        # if obj.user != self.request.user:
-        #     raise PermissionDenied("You are not allowed to delete this customer.")
-        return obj
+def DeletePatient(request, pk):
+    if request.method == "POST":
+        patient = Patient.objects.filter(id=pk)
+        patient.delete()
+        return redirect('patient_list')
