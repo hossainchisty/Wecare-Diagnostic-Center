@@ -8,7 +8,7 @@ from laboratory.models.lab_models import Lab
 
 class UpdateLabView(UpdateView):
     model = Lab
-    fields = ['patient', 'referred_by_doctor', 'report', 'total', 'report_status']
+    fields = ['patient', 'referred_by_doctor', 'total', 'report_status', 'duration']
     template_name = 'report/lab_report_form.html'
     success_url = reverse_lazy('lab_report_list')
 

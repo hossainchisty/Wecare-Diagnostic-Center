@@ -1,16 +1,16 @@
 {% extends 'core/_base.html' %}
-{% block title %} Lab Tests {% endblock title %}
+{% block title %} Report Name List {% endblock title %}
 {% block body %}
 <div class="container-fluid">
     <!-- Tests Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lab Tests</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Report Name List</h6>
         </div>
 
         {% if tests %}
         <div class="card-body">
-            <div class="text-center">
+            {% comment %} <div class="text-center">
                 <a class="hover:no-underline" href="">
                     <button class="py-1 px-2 text-white rounded-lg bg-green-400 block md:inline-block">
                         CSV
@@ -36,7 +36,7 @@
                         <i class="fas fa-print"></i>
                     </button>
                 </a>
-            </div>
+            </div> {% endcomment %}
             <div class="pb-3">
                 <a href="{% url 'add_lab_tests' %}">
                     <button type="button" class="btn btn-primary">

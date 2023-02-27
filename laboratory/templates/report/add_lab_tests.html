@@ -1,9 +1,9 @@
 {% extends 'core/_base.html' %}
-{% block title %} Add new lab test {% endblock title %}
+{% block title %} Add Report Name {% endblock title %}
 {% load crispy_forms_tags %}
 {% block body %}
 <section class="max-w-2xl p-5 mx-auto bg-white rounded-md shadow-md mt-20">
-    <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Add new lab test</h2>
+    <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Add Report Name</h2>
     <form method="POST">
         <!-- Security token -->
         {% csrf_token %}

@@ -1,16 +1,16 @@
 {% extends 'core/_base.html' %}
-{% block title %} Lab Report {% endblock title %}
+{% block title %} Lab Report List {% endblock title %}
 {% block body %}
 <div class="container-fluid">
     <!-- lab Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Lab Report</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Lab Report List</h6>
         </div>
 
         {% if lab %}
         <div class="card-body">
-            <div class="text-center">
+            {% comment %} <div class="text-center">
                 <a class="hover:no-underline" href="">
                     <button class="py-1 px-2 text-white rounded-lg bg-green-400 block md:inline-block">
                         CSV
@@ -36,21 +36,23 @@
                         <i class="fas fa-print"></i>
                     </button>
                 </a>
-            </div>
+            </div> {% endcomment %}
             <div class="pb-3">
                 <a href="{% url 'add_lab' %}">
                     <button type="button" class="btn btn-primary">
                         <i class="fa fa-plus"></i>
-                        Add Lab Report</button>
+                        Add Lab Report List</button>
                 </a>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-center">Report ID</th>
-                            <th class="text-center">Patient</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Patients</th>
+                            <th class="text-center">Ref. By Doctor</th>
                             <th class="text-center">Date</th>
+                            <th class="text-center">Delivery Time</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -60,7 +62,9 @@
                         <tr>
                             <td class="text-center">{{ item.id }}</td>
                             <td class="text-center">{{ item.patient }}</td>
-                            <td class="text-center">{{ item.date }}</td>
+                            <td class="text-center">{{ item.referred_by_doctor }}</td>
+                            <td class="text-center">{{ item.created_at }}</td>
+                            <td class="text-center">{{ item.duration }}</td>
                             {% if item.report_status == 'sample' %}
                             <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-400 text-white rounded-full">{{ item.report_status|title }} Collected</span></td>
                             {% elif item.report_status == 'completed' %}
@@ -91,7 +95,7 @@
                             </td>
                         </tr>
                     </tbody>
-                    <!-- Lab report delete modal start -->
+                    <!-- Lab Report List delete modal start -->
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -114,7 +118,7 @@
                         </form>
                         </div>
                     </div>
-                    <!-- Lab report delete modal end -->
+                    <!-- Lab Report List delete modal end -->
                     {% endfor %}
                 </table>
             </div>
