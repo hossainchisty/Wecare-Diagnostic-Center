@@ -12,7 +12,7 @@ class DoctorForm(ModelForm):
 
     class Meta:
         model = Doctor
-        fields = ['name', 'email', 'password', 'phone', 'designation', 'depertment', 'avatar']
+        fields = ['name', 'email', 'password', 'phone', 'depertment', 'avatar']
         widgets = {
             'password': forms.PasswordInput(),
          }

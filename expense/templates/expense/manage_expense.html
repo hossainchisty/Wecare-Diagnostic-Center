@@ -1,16 +1,16 @@
 {% extends 'core/_base.html' %}
-{% block title %} Manage Expense {% endblock title %}
+{% block title %} List Of Expense {% endblock title %}
 {% load humanize %}
 {% block body %}
 <div class="container-fluid">
     <!-- Expense Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Manage Expense</h6>
+            <h6 class="m-0 font-weight-bold text-primary">List Of Expense</h6>
         </div>
         {% if expenses %}
         <div class="card-body">
-            <div class="text-center">
+            {% comment %} <div class="text-center">
                 <a class="hover:no-underline" href="{% url 'download_expense_csv' %}">
                     <button class="py-1 px-2 text-white rounded-lg bg-green-400 block md:inline-block">
                     CSV
@@ -35,7 +35,7 @@
                     <i class="fas fa-print"></i>
                     </button>
                 </a>
-            </div>
+            </div> {% endcomment %}
             <div class="pb-3">
                 <a href="{% url 'add_expense' %}">
                     <button type="button" class="btn btn-primary">
@@ -56,7 +56,7 @@
                         <tr>
                             <th class="text-center">SL.</th>
                             <th class="text-center">Category</th>
-                            <th class="text-center">Date</th>
+                            <th class="text-center">Date-Time</th>
                             <th class="text-center">Amount</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -67,7 +67,7 @@
                         <tr>
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td class="text-center">{{ expense.category  }}</td>
-                            <td class="text-center">{{ expense.date|naturalday|title  }}</td>
+                            <td class="text-center">{{ expense.created_at|title  }}</td>
                             <td class="text-center">{{ expense.amount|intcomma }}</td>
                             <td class="text-center">
                                 <button class="btn-sm">

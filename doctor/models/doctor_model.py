@@ -17,7 +17,6 @@ class Doctor(BaseModel):
     phone_regex = RegexValidator(
         regex=r'^(?:\+88|88)?(01[3-9]\d{8})$')
     phone = models.CharField(max_length=11, validators=[phone_regex], unique=True, help_text="Phone number must be entered in the format: '+8801XXXXXXXXX'.") # noqa
-    designation = models.CharField(max_length=50)
     depertment = models.ForeignKey(Department, on_delete=models.CASCADE)
     commission = models.DecimalField(max_digits=5, decimal_places=2,  default=0.00)
     total = models.DecimalField(max_digits=15, decimal_places=2,  default=0.00)

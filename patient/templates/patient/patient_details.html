@@ -11,7 +11,8 @@
 							{% comment %} <img src="{{ data.avatar.url }}" alt="Admin" class="rounded-circle p-1"
 								width="110"> {% endcomment %}
 							<div class="mt-5">
-								<h4 class="text-black">{{ data.name }} <p class="text-sm"> (UHID: {{ data.unique_id }})
+								<h4 class="text-black font-bold">{{ data.name }} 
+								<p class="text-sm"> (UHID: {{ data.unique_id }})
 									</p>
 								</h4>
 							</div>
@@ -84,7 +85,7 @@
 														</a>
 													</div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														{{ data.total_bill }}
+														{{ data.grand_total }}
 													</div>
 												</div>
 											</div>
@@ -122,7 +123,27 @@
 														</a>
 													</div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800">
-														{{ data.total_deposit }}
+														{{ data.paid_amount }}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- end -->'
+
+								<!-- start -->
+								<div class="col-sm">
+									<div class="card border-left-success shadow h-100 py-2">
+										<div class="card-body">
+											<div class="row no-gutters align-items-center">
+												<div class="col mr-2">
+													<div class="text-xs font-weight-bold text-uppercase mb-1">
+														<a class="text-success hover:no-underline" href="">Appointments
+														</a>
+													</div>
+													<div class="h5 mb-0 font-weight-bold text-gray-800">
+														{{ appointment_completed }}
 													</div>
 												</div>
 											</div>
@@ -146,9 +167,9 @@
 								<form method="post">
 									<div class="form-group">
 										<!-- Date input -->
-										<label class="m-2">Date From</label>
+										<label class="m-2 text-black">Date From</label>
 										<input type="date" class="form-control" name="date_from" type="date">
-										<label class="m-2">Date To</label>
+										<label class="m-2 text-black">Date To</label>
 										<input type="date" class="form-control" name="date_to" type="date">
 										<!-- Submit button -->
 										<button class="btn btn-primary m-1" name="submit" type="submit">Submit</button>
@@ -156,15 +177,19 @@
 								</form>
 								<!-- Form code ends -->
 								<hr>
-								<h5 class="d-flex align-items-center">Statistic</h5>
+
+								<h5 class="d-flex align-items-center text-black font-bold">Lab History</h5>
+							{% if tests and lab %}
+
 								<!-- Patient testsed lists start -->
 								<table class="table table-striped">
 									<thead>
 										<tr>
 											<th scope="col">SN</th>
 											<th scope="col">Particulars</th>
-											<th scope="col">QTY</th>
 											<th scope="col">Amount</th>
+											<th scope="col">Total</th>
+											<th scope="col">Status</th>
 											<th scope="col">Invoice Date</th>
 										</tr>
 									</thead>
@@ -179,26 +204,45 @@
 											</th>
 											<td>
 												{% if tests %}
-          {% for test in tests %}
-          {{ test.title }} <br>
-          {% endfor %}
-          {% endif %}
+											{% for test in tests %}
+											{{ test.title }} <br>
+											{% endfor %}
+											{% endif %}
 
 											</td>
-											<td>1</td>
 											<td>
 												{% if tests %}
-          {% for test in tests %}
-          {{ test.price }} <br>
-          {% endfor %}
-          {% endif %}
+												{% for test in tests %}
+												{{ test.price }} <br>
+												{% endfor %}
+												{% endif %}
 
 											</td>
+											<td>
+												{{ lab.total }}
+												<br>
+											</td>
+											{% if lab.report_status == 'sample' %}
+												<td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-400 text-white rounded-full">{{ lab.report_status|title }} Collected</span></td>
+												{% elif lab.report_status == 'completed' %}
+												<td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-indigo-500 text-white rounded-full">{{ lab.report_status|title }}</span></td>
+												{% elif lab.report_status == 'delivered' %}
+												<td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-500 text-white rounded-full">{{ lab.report_status|title }}</span></td>
+											{% endif %}
 											<td>{{ lab.created_at }}</td>
 										</tr>
 									</tbody>
 								</table>
 								<!-- Patient testsed lists end -->
+								
+							
+							{% else %}
+							<div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 p-2" role="alert">
+								<p class="font-bold">NOTHING HERE...</p>
+								<p class="text-sm">It's empty, here you don't have any lab tests.</p>
+							</div>
+							{% endif %}
+
 							</div>
 						</div>
 					</div>

@@ -20,8 +20,7 @@ class Schedule(BaseModel):
     weekday = models.CharField(max_length=10, choices=WEEKDAY_CHOICES)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    appointment_duration = models.CharField(max_length=40)
-    visit_charges = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    visit_charges = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self) -> str:
         return f'{self.doctor} at {self.start_time}-{self.end_time}'

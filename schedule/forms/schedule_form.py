@@ -11,7 +11,7 @@ class ScheduleForm(ModelForm):
     class Meta:
         model = Schedule
         fields = '__all__'
-        # exclude = ['user', ]
+        exclude = ['user', ]
         widgets = {
             'start_time': DateInput(attrs={'type': 'time'}),
             'end_time': DateInput(attrs={'type': 'time'}),

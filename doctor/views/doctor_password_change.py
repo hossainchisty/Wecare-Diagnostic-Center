@@ -11,10 +11,10 @@ class ChangePassword(View):
         TODO: 1. check old password if its current then allow user to change password with new onece
         '''
 
-        old_password = request.GET.get('old_password')
-        print(old_password)
-        docId = Doctor.objects.get(id=doctor_id).filter(password=old_password)
-        print(docId)
+        # old_password = request.GET.get('old_password')
+        # print(old_password)
+        # docId = Doctor.objects.get(id=doctor_id).filter(password=old_password)
+        # print(docId)
         return render(request, 'doctor/change_password.html')
 
     # def post(self, request, *args, **kwargs):
