@@ -13,8 +13,6 @@ class CreateAppointmentView(View):
     def post(self, request, *args, **kwargs):
         ''' Create a new appointment '''
         form = AppointmentForm(request.POST)
-        # Automatically set to the currently logged-in usera
-        # form.instance.user = request.user
         if form.is_valid():
             form.save()
             """Provide a redirect on GET request."""

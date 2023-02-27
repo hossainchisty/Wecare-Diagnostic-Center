@@ -31,6 +31,7 @@ class Appointment(BaseModel):
     )
     payment_status = models.CharField(max_length=10, choices=PAYMENT_STATUS, default='unpaid')
     remarks = models.CharField(max_length=20, null=True, blank=True)
+    is_read = models.BooleanField(default=False)
 
     class Meta:
         get_latest_by = ['date']

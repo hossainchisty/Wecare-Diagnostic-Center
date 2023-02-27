@@ -89,8 +89,11 @@
           class="sidebar-brand d-flex align-items-center justify-content-center"
           href="{% url 'dashboard' %}"
         >
-          <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-hospital"></i>
+          <div class="sidebar-brand-icon">
+            <img
+                        class="w-20 h-10"
+                        src="{{ request.user.hospitial_logo.url }}"
+                      />
           </div>
           <div class="sidebar-brand-text mx-3 font-weight-bolder text-monospace">{{ request.user.title }}<sup></sup></div>
         </a>
@@ -105,6 +108,10 @@
             <span>Dashboard</span></a
           >
         </li>
+
+        <!-- Lab Test menus start -->
+        {% include 'core/sidemenus/lab_side_menus.html' %}
+        <!-- Lab Test menus end -->
 
         <!-- Depertment menus start -->
         {% include 'core/sidemenus/department_side_menus.html' %}
@@ -125,14 +132,10 @@
         <!-- Appointment menus start -->
         {% include 'core/sidemenus/appointment_side_menus.html' %}
         <!-- Appointment menus end -->        
-        
-        <!-- Lab Test menus start -->
-        {% include 'core/sidemenus/lab_side_menus.html' %}
-        <!-- Lab Test menus end -->
 
-        <!-- HR menus start -->
+        {% comment %} <!-- HR menus start -->
         {% include 'core/sidemenus/hr_side_menus.html' %}
-        <!-- HR menus end -->
+        <!-- HR menus end --> {% endcomment %}
 
         <!-- Financial menus start -->
         {% include 'core/sidemenus/financial_side_menus.html' %}
@@ -297,6 +300,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+    <script src="{% static 'js/notifications.js' %}"></script>
 
     <!-- Page level plugins -->
     <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>

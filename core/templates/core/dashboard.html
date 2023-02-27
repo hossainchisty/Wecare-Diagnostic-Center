@@ -7,12 +7,29 @@
             <p id="greeting"></p>
         </h4>
 
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
     </div>
 
-    <!-- Content Row -->
-    <div class="row">
+        <div class="row">
+        <!-- Upper -->
+        <!-- Total Expense -->
+        {% include 'core/components/TotalExpenseCard.html' %}
+        <!-- End -->
+
+        <!-- Today Expense -->
+        {% include 'core/components/TodayExpenseCard.html' %}
+        <!-- End -->
+
+        <!-- Total Yearly Income -->
+        {% include 'core/components/YearlyIncomeCard.html' %}
+        <!-- End -->        
+        
+        <!-- Total Monthly Income -->
+        {% include 'core/components/MonthlyIncomeCard.html' %}
+        <!-- End -->
+
+        <!-- Lower -->
         <!-- Total customer -->
         {% include 'core/components/TotalDoctorCard.html' %}
         <!-- End -->
@@ -25,7 +42,7 @@
         {% include 'core/components/AppointmentCard.html' %}
         <!-- End -->
 
-        <!-- Expired medicine -->
+        <!-- Expired lab -->
         {% include 'core/components/LabReportCard.html' %}
         <!-- End -->
 
@@ -43,7 +60,7 @@
         <!-- Expense Pie Chart End -->
 
         <!-- Today Status - Start -->
-        <div class="flex space-x-4">
+        {% comment %} <div class="flex space-x-4">
             <div class="justify-between rounded-xl mt-4 p-4 bg-white shadow-lg">
                 <h1 class="text-xl font-bold text-gray-800 mt-4">Today’s Status</h1>
                 <div class="flex justify-between space-x-4 text-center mt-6">
@@ -105,8 +122,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Today Status - end -->
+
+        <!-- Content Row -->
 <!-- /.container-fluid -->
 
 </div>
@@ -128,7 +147,7 @@
             const currentTime = new Date().getHours();
             return (
                 <>
-                    👋 {{ request.user.title }}, Good{" "}
+                    {{ request.user.title }}, Good{" "}
                     {currentTime >= 12
                         ? currentTime >= 16
                             ? "Evening🌇"

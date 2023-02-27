@@ -9,4 +9,4 @@ class AppointmentForm(ModelForm):
     ''' Form asking for create appointment '''
     class Meta:
         model = Appointment
-        fields = ['patient', 'doctor', 'schedule', 'appointment_status', 'payment_status', 'discount','remarks'] # noqa
+        fields = ['patient', 'doctor', 'schedule', 'remarks'] # noqa
