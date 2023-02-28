@@ -22,7 +22,7 @@ class Category(BaseModel):
 class Expense(BaseModel):
     """ Expense model for storing expense data """
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    date = models.DateField(default=f'{today}') #TODO: REMOVE
+    date = models.DateField(default=f'{today}')
     note = models.CharField(max_length=100, null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 

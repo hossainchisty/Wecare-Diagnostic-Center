@@ -1,0 +1,100 @@
+{% extends 'core/_base.html' %}
+{% load static %}
+{% block title %} List Of Due {% endblock title %}
+<!-- CSS Files End -->
+{% block body %}
+<div class="container-fluid">
+    <div class="row m-0">
+        <div class="col-md-7 col-12">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="row box-right">
+                        <div class="col-md-8 ps-0 ">
+                            <p class="text-black ps-3 textmuted fw-bold h6 mb-0">All Bills & Deposits</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 px-0 mb-4 p-2">
+                    <div class="box-right">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Grand Total</th>
+                                    <th scope="col">Paid Amount</th>
+                                    <th scope="col" class="text-center">Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">{{ data.created_at }}</th>
+                                    <td>{{ data.grand_total }}</td>
+                                    <td>{{ data.paid_amount }}</td>
+                                    <td>
+                                        <button class="btn-sm">
+                                            <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block"
+                                                href="{% url 'due_payment' data.id data.unique_id %}">
+                                                <i class="fa fa-edit" style="font-size:13px"></i>
+                                            </a>
+                                        </button>
+
+                                        <button class="btn-sm">
+                                            <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block"
+                                                href="">
+                                                <i class="fa fa-file" style="font-size:13px"></i>
+                                            </a>
+                                        </button>
+
+                                        <button class="btn-sm">
+                                            <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block"
+                                                data-toggle="modal" data-target="#deleteModal" href="">
+                                                <i class="fas fa-trash-alt" style="font-size:13px"></i>
+                                            </a>
+                                        </button>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-12 ps-md-5 p-0 ">
+            <div class="box-left">
+                <p class="fw-bold h7">Patient Name: {{ data.name }}</p>
+                <p class="textmuted h8">Mobile: {{ data.phone }}</p>
+                <div class="h7">
+                    <div class="row m-0 border mb-3">
+                        <div class="col-3 h8 pe-0 ps-2">
+                            <p class="textmuted py-2">Grand Total</p>
+                            <span class="d-block py-2">{{ data.grand_total }}</span>
+                        </div>
+                        <div class="col-3 text-center p-0">
+                            <p class="textmuted py-2">Paid Amount</p>
+                            <span class="d-block p-2">{{ data.paid_amount }}</span>
+                        </div>
+                        <div class="col-3 p-0 text-center h8 border-end">
+                            <p class="textmuted py-2">Due Amount</p>
+                            <span class="d-block p-2"">{{ data.due }}</span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="">
+                    <p class="h7 fw-bold mb-1">Print this Invoice</p>
+                    
+                        <div class="btn btn-primary d-block h8">Print 
+                                <span class="ms-3 fas fa-download"></span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

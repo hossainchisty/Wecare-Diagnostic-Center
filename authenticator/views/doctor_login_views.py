@@ -5,7 +5,6 @@ from django.shortcuts import redirect, render
 
 from authenticator.models import User
 from doctor.models.doctor_model import Doctor
-from utility.helper.decorators.verifiy import EmailBackEnd
 
 # class DoctorSignInView(auth_views.LoginView):
 #     ''' Sign in for customer '''

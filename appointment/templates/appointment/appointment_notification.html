@@ -1,15 +1,15 @@
 {% extends 'core/_base.html' %}
-{% block title %} List Of Patinet {% endblock title %}
+{% block title %} Manage Appointment {% endblock title %}
 {% block body %}
 <div class="container-fluid">
-    <!-- Patient Table -->
+    <!-- Appointment Table -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List Of Patinet</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Manage Appointment</h6>
         </div>
-        {% if patient %}
+        {% if appointment %}
         <div class="card-body">
-        {% comment %} <div class="text-center">
+        <div class="text-center">
                 <a class="hover:no-underline" href="">
                     <button class="py-1 px-2 text-white rounded-lg bg-green-400 block md:inline-block">
                         CSV
@@ -35,12 +35,12 @@
                         <i class="fas fa-print"></i>
                     </button>
                 </a>
-            </div> {% endcomment %}
+            </div>
         <div class="pb-3">
-                <a href="{% url 'add_patient' %}">
+                <a href="{% url 'add_appointment' %}">
                     <button type="button" class="btn btn-primary">
                     <i class="fa fa-plus"></i>
-                        Add Patient
+                        Add Appointment
                     </button>
                 </a>
                
@@ -49,65 +49,66 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-center">Patient UHID</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Phone</th>
-                            <th class="text-center">Grand Total</th>
-                            <th class="text-center">Paid Amount</th>
-                            <th class="text-center">Due Balance</th>
+                            <th class="text-center">SL.</th>
+                            <th class="text-center">Patient</th>
+                            <th class="text-center">Doctor</th>
+                            <th class="text-center">Start Time - End Time</th>
+                            <th class="text-center">Duration</th>
+                            <th class="text-center">Bill Status</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    {% for item in patient %}
+                    {% for item in appointment %}
                     <tbody>
                         <tr>
-                            <td class="text-center">#{{ item.unique_id }}</td>
-                            <td class="text-center">{{ item.name }}</td>
-                            <td class="text-center">{{ item.phone }}</td>
-                            <td class="text-center">{{ item.grand_total }}</td>
-                            <td class="text-center">{{ item.paid_amount }}</td>
-                            <td class="text-center text-danger font-bold">{{ item.due }}</td>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="text-center">{{ item.patient.name }}</td>
+                            <td class="text-center">{{ item.doctor.name }}</td>
+                            <td class="text-center">{{ item.schedule.start_time }} - {{ item.schedule.end_time }}</td>
+                            <td class="text-center">{{ item.schedule.appointment_duration }}</td>
+                             {% if item.payment_status == 'paid' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-400 text-white rounded-full">{{ item.payment_status|title }}</span></td>
+                            {% else %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-400 text-white rounded-full">{{ item.payment_status|title }}</span></td>
+                            {% endif %}
 
-
+                            {% if item.appointment_status == 'pending confirmation' %}
+                            <td class="text-center">
+                                <span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-400 text-white rounded-full">{{ item.appointment_status|title }} 
+                               </span>
+                            </td>
+                            {% elif item.appointment_status == 'confirmed' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-green-400 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            {% elif item.appointment_status == 'treated' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-900 text-white rounded-full">{{ item.appointment_status|title }}</span></td> 
+                            {% elif item.appointment_status == 'cancelled' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-red-500 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            
+                            {% elif item.appointment_status == 'requested' %}
+                            <td class="text-center"><span class="text-xs inline-block py-2 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-500 text-white rounded-full">{{ item.appointment_status|title }}</span></td>
+                            {% endif %}
                             <td class="text-center">
                                 <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-indigo-500 block md:inline-block" href="{% url 'patient_details'  item.id item.unique_id %}">
-                                        <i class="fas fa-eye" style="font-size:15px"></i>
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'confirmed_appointment' item.id %}">
+                                        <i class="fa fa-check" style="font-size:15px"></i>
                                     </a>
                                 </button>
 
                                 <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'update_patient' item.id %}">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" href="{% url 'cancle_appointment' item.id %}">
+                                        <i class="fa fa-times" style="font-size:15px"></i>
+                                    </a>
+                                </button>
+                                
+                                <button class="btn-sm">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="{% url 'update_appointment' item.id %}">
                                         <i class="fa fa-edit" style="font-size:15px"></i>
                                     </a>
                                 </button>
 
-                                {% comment %} <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="">
-                                        <i class="fa fa-calendar" style="font-size:15px"></i>
-                                    </a>
-                                </button>
-                                
                                 <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="">
-                                        <i class="fa fa-book" style="font-size:15px"></i>
-                                    </a>
-                                </button>
-                                
-                                <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="">
-                                        <i class="fa fa-stethoscope" style="font-size:15px"></i>
-                                    </a>
-                                </button>
-                                
-                                <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-green-400 block md:inline-block" href="">
-                                        <i class="fa fa-money-bill-alt" style="font-size:15px"></i>
-                                    </a>
-                                </button> {% endcomment %}
-
-                                <button class="btn-sm">
-                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_patient' item.id %}">
+                                    <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block" data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_appointment' item.id %}">
                                         <i class="fas fa-trash-alt" style="font-size:15px"></i>
                                     </a>
                                 </button>
@@ -115,11 +116,11 @@
                             </td>
                         </tr>
                     </tbody>
-                     <!-- Patient delete modal start -->
+                     <!-- Appointment delete modal start -->
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                        <form action="{% url 'delete_patient' item.id %}" method="POST">
+                        <form action="{% url 'delete_appointment' item.id %}" method="POST">
                             <!-- Security token -->
                             {% csrf_token %}
                             <div class="modal-content">
@@ -138,7 +139,7 @@
                         </form>
                         </div>
                     </div>
-                    <!-- Patient delete modal end -->
+                    <!-- Appointment delete modal end -->
                     {% endfor %}
                 </table>
             </div>
@@ -154,13 +155,13 @@
                             <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        {% if patient.has_previous %}
-                        <a class="text-sm ml-3 font-medium leading-none " href="?page={{ patient.previous_page_number }}">Previous</a>
+                        {% if appointment.has_previous %}
+                        <a class="text-sm ml-3 font-medium leading-none " href="?page={{ appointment.previous_page_number }}">Previous</a>
                       {% endif %}
                     </div>
                     <div class="sm:flex hidden">
-                    {% for i in patient.paginator.page_range %}
-                        {% if patient.number == i %}
+                    {% for i in appointment.paginator.page_range %}
+                        {% if appointment.number == i %}
                             <a class="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2" href="#">{{ i }} </a>
                         
                         {% else %}
@@ -169,8 +170,8 @@
                     {% endfor %}
                     </div>
                     <div class="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
-                        {% if patient.has_next %}
-                        <a class="text-sm font-medium leading-none mr-3" href="?page={{ patient.next_page_number }}">Next</a>
+                        {% if appointment.has_next %}
+                        <a class="text-sm font-medium leading-none mr-3" href="?page={{ appointment.next_page_number }}">Next</a>
                       {% endif %}
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
@@ -184,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <p class="text-base">Showing {{ patient.number }}/{{ patient.paginator.num_pages }}</p>
+            <p class="text-base">Showing {{ appointment.number }}/{{ appointment.paginator.num_pages }}</p>
             <!--- Pagination End -->
         </div>
         {% else %}

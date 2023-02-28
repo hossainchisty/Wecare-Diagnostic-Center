@@ -67,7 +67,7 @@
                         <tr>
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td class="text-center">{{ expense.category  }}</td>
-                            <td class="text-center">{{ expense.created_at|title  }}</td>
+                            <td class="text-center">{{ expense.created_at |date:'Y-m-d H:i-a' }}</td>
                             <td class="text-center">{{ expense.amount|intcomma }}</td>
                             <td class="text-center">
                                 <button class="btn-sm">

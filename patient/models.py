@@ -49,5 +49,13 @@ class Patient(BaseModel):
     # TODO: received_by
     status = models.BooleanField(default=True)
 
+    # def save(self, *args, **kwargs):
+    #     ''' update payment status '''
+    #     if self.due == 0.00:
+    #         self.payment_status == 'paid'
+    #     else:
+    #         self.payment_status == 'unpaid'
+    #     super(Patient, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.name

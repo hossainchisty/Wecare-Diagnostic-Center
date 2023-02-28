@@ -9,6 +9,7 @@ from appointment.views.delete_appointment_views import DeleteAppointment
 from appointment.views.today_appointment_list_views import TodayAppointmentListView
 from appointment.views.upcomming_appointment_list_views import UpcommingAppointmentListView
 from appointment.views.update_appointment_views import UpdateAppointment
+from appointment.views.notifications import AppointmentNotify, UnreadNotify
 
 # Routing Implement
 urlpatterns = [
@@ -22,5 +23,8 @@ urlpatterns = [
     # Status update
     path('cancle/<int:id>/', MakeAppointmentCancelView.as_view(), name='cancle_appointment'),
     path('confirmed/<int:id>/', MakeAppointmentConfirmedView.as_view(), name='confirmed_appointment'),
+
+    path('notifications/', AppointmentNotify.as_view(), name='appointment_notifications'),
+    path('unread/notifications/', UnreadNotify, name='unread_notifications'),
 
 ]
