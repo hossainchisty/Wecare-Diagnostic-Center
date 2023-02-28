@@ -1,17 +1,11 @@
 # Basic Lib Import
-# from django.core.exceptions import PermissionDenied
-from django.urls import reverse_lazy
-from django.views.generic.edit import DeleteView
-
 from expense.models import Category
+from django.shortcuts import redirect
 
 
-class DeleteExpenseCategories(DeleteView):
-    model = Category
-    success_url = reverse_lazy('expense_category')
-
-    def get_object(self, queryset=None):
-        obj = super().get_object()
-        # if obj.user != self.request.user:
-        #     raise PermissionDenied("You are not allowed to delete this expense.")
-        return obj
+def DeleteExpenseCategories(request, pk):
+    ''' Delete an expense category object '''
+    if request.method == "POST":
+        expense_category = Category.objects.filter(id=pk)
+        expense_category.Delete()
+        return redirect('expense_category')

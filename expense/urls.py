@@ -19,12 +19,12 @@ urlpatterns = [
     path('list/', ManageExpense.as_view(), name='manage_expense'),
     path('add/', CreateExpense.as_view(), name='add_expense'),
     path('update/<pk>', UpdateExpense.as_view(), name='update_expense'),
-    path('delete/<pk>', DeleteExpense.as_view(), name='delete_expense'),
+    path('delete/<pk>', DeleteExpense, name='delete_expense'),
 
     # Categories
     path('category/', ExpenseCategory.as_view(), name='expense_category'),
     path('add/category/', CreateCategory.as_view(), name='add_category'),
-    path('delete/category/<pk>', DeleteExpenseCategories.as_view(), name='delete_expense_categories'),
+    path('delete/category/<pk>', DeleteExpenseCategories, name='delete_expense_categories'),
     path('update/category/<pk>', UpdateExpenseCategories.as_view(), name='update_expense_categories'),
 
     # File management
