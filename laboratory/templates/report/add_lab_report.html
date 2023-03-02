@@ -1,20 +1,235 @@
 {% extends 'core/_base.html' %}
-{% block title %} Diagnostic Test {% endblock title %}
+{% block title %} Add new lab report {% endblock title %}
 {% load crispy_forms_tags %}
 {% block body %}
-<section class="max-w-2xl p-5 mx-auto bg-white rounded-md shadow-md mt-20">
-    <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Diagnostic Test</h2>
-    <form method="POST">
-        <!-- Security token -->
+
+<style>
+    #admdevice {
+        color: black;
+        text-align: left;
+        font-weight: bold;
+    }
+</style>
+<div class="container">
+    <div class="row gx-0">
+        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+
+    <h2 class="text-lg font-bold text-black capitalize dark:text-white">Add new lab report</h2>
+    
+    <form class="custom-validation block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-4 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" action="{% url 'add_lab' %}" method="post" id="admdevice">
         {% csrf_token %}
-        <div class="grid grid-cols-1 gap-2 mt-4 sm:grid-cols-1">
-            <div>
-                {{ form|crispy }}
+
+        <input type="hidden" value="lab"  name="lab_name"
+                 required>
+
+
+        <div class="mb-3">
+            <label for="sector">Patient</label>
+            <select class="form-control js-example-basic-single" name="patient_name">
+                {% for patient_list in patient_list %}
+                <option value="{{patient_list.id}}">{{ patient_list.unique_id }} -- {{ patient_list.name }} 
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="sector">Doctor</label>
+            <select class="form-control js-example-basic-single" name="doctor_name">
+                <option > -------------
+                </option>
+                {% for doctor_list in doctor_list %}
+                
+                <option value="{{doctor_list.id}}">{{ doctor_list.name }}
+                </option>
+                
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label for="sector">Report</label>
+            <select id="report_id" class="form-control js-example-basic-single" name="myReport_name">
+          
+                {% for report_list in report_list %}
+               
+                <option data-id="1"  value="{{report_list.id}}">{{ report_list.title }} 
+                </option>
+                
+                
+                {% endfor %}
+            </select> 
+    
+        </div>
+    
+        <button type="button" name="mytest" id="mytest"
+        class="btn btn-success">Add
+        Commission</button>
+    
+    
+    
+        <div class="mb-5 py-2">
+            <label for="depth">Commission List</label>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="report_dynamic_field">
+                    
+                </table>
             </div>
-            <div class="flex justify-end mt-6">
-                <button type="submit"
-                    class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-            </div>
+        </div>
+
+        {% comment %} <div class="mb-3">
+            <label  id="mytotalbill" for="depth" >Total Bill :  </label>
+        </div> {% endcomment %}
+
+        <button type="submit" class="btn btn-success"
+        onclick="return validate()">Create</button>
+
+
     </form>
-</section>
+</div>
+
+
+
+<div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0 ">
+
+    <h2 class="text-lg font-bold text-black  capitalize dark:text-white">Add new patient</h2>
+    <form class="custom-validation block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-4 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" action="{% url 'add_lab' %}" method="post" id="admdevice">
+        {% csrf_token %}
+    
+        <input type="hidden" value="patient"  name="lab_name"
+                 required>
+
+        <div class="mb-3">
+            <label for="device_name">Patient Name</label>
+            <input type="text" class="form-control" name="patient_name" id="patient_name"
+                placeholder="Patient Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="device_name">Patient Address</label>
+            <input type="text" class="form-control" name="patient_address" id="patient_address"
+                placeholder="Patient Address" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="device_name">Patient Phone</label>
+            <input type="text" class="form-control" name="patient_phone" id="patient_phone"
+                placeholder="Patient Phone" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="device_name">Patient Age</label>
+            <input type="text" class="form-control" name="patient_age" id="patient_age"
+                placeholder="Patient Age" required>
+        </div>
+
+        <button type="submit" class="btn btn-success"
+        onclick="return validate()">Create</button>
+
+
+    </form>
+</div>
+
+
+</div>
+</div>
 {% endblock body %}
+
+
+{% block js %}
+
+<script>
+    $(document).ready(function () {
+    // Send an AJAX request to the Django view
+    console.log('ggg');
+    var i = 1;
+    $('#mytest').click(function () {
+        {% comment %} $("#mytotalbill").text("Hello world!"); {% endcomment %}
+        
+        //var r_button_id = $("#report_id").attr("data-id");
+
+        var r_button_id = $("#report_id").val();
+        //var ff_button_id = $("#report_id").data("value").val();
+
+
+        console.log('hhh');
+        console.log(r_button_id);
+        //console.log(ff_button_id);
+        // Send an AJAX request to the Django view
+        $.ajax({
+          url: "{% url 'load_more_content' %}",
+          type: 'get',
+          dataType: 'json',
+          data: {
+            offset: r_button_id // Pass any necessary data, such as the current offset of the content
+          },
+         
+          success: function(response) {
+            console.log('nnn');
+            console.log(response);
+            // Add the new content to the container
+            $('#content-container').append(response.data.content_html);
+            $('#content-container').append(response.data.report_test_list.id);
+            $('#report_dynamic_field').append('<tr style="margin: 5px;" id="row' + i + '"><td>' + response.data.report_test_list.title + '</td><td data-id=" '+ i +' ">' + response.data.report_test_list.price + '</td><td>' + response.data.report_test_list.commission + '</td><input type="hidden" value='+ response.data.report_test_list.title +' name="report_title_list" /><input type="hidden" value='+ response.data.report_test_list.commission +' name="report_commission_list" /><input type="hidden" value='+ response.data.report_test_list.price +' name="report_price_list" /><td><input type="number" name="report_name"  placeholder="Enter Commission" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            var mybill = 0;
+            mybill = mybill + response.data.report_test_list.price;
+            let dataId = $("#mymm").data("id");
+            // lop = $("#mymm").text()
+            console.log('bbbb',lop);
+            //$("#mytotalbill").text(lop);
+          },
+          error: function() {
+            // Handle any errors
+            alert('Error loading more content.');
+          }
+        });
+    });
+      
+
+}); 
+
+</script>
+
+
+<!-- content-wrapper -->
+<script>
+    $(document).ready(function () {
+        var i = 1;
+        $('#add').click(function () {
+            i++;
+            $('#report_dynamic_field').append('<tr style="margin: 5px;" id="row' + i + '"><td><input type="number" name="depth[]" id="depths1" placeholder="Enter your Depths" class="form-control name_list" required /></td><td>  </td><td>gh<button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "{% url 'add_lab' %}",
+                method: "POST",
+                data: $('#admdevice').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#admdevice')[0].reset();
+                }
+            });
+        });
+    });  
+</script>
+
+
+<script>
+    function validate() {
+        var depth = document.getElementById("depths").value;
+        var depth1 = document.getElementById('depths1').value;
+        // var depth2 = document.getElementById('depths3').value;
+        if (depth == depth1) {
+            alert("Don't Enter Same Value in Depths");
+            return false
+        } else {
+            return true
+        }
+    }
+</script>
+
+{% endblock %}

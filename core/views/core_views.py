@@ -11,3 +11,10 @@ class Dashboard(View):
         Main dashboard view for the application.
         '''
         return render(request, 'core/dashboard.html')
+
+class DcotorDashboard(View):
+    def get(self, request):
+        ''''
+        Main dashboard view for the application.
+        '''
+        return render(request, 'core/doctor.html')

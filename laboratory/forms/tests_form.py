@@ -2,7 +2,7 @@
 
 from django.forms import ModelForm
 
-from laboratory.models import Reportlist
+from laboratory.models.reports_models import Reportlist
 
 
 class TestForm(ModelForm):

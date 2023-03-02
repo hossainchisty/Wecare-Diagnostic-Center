@@ -1,26 +1,46 @@
-# Basic Lib Import
-from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
 from django.db import models
-from django.utils.timezone import now
-from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.core.validators import RegexValidator
 
-from .manager import UserManager
+
+class MyUserManager(BaseUserManager):
+    def create_user(self, first_name, last_name, email, username, password=None):
+        if not email:
+            raise ValueError('User Must Have A Email Address')
+
+        if not username:
+            raise ValueError('User Must Have A Username')
+        user = self.model(
+            email=self.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name,
+            username=username,
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, first_name, last_name, email, username, password):
+        user = self.create_user(
+            email=self.normalize_email(email),
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+        )
+        user.is_admin = True
+        user.is_active = True
+        user.is_staff = True
+        user.is_superuser = True
+        user.save()
 
 
 class User(AbstractUser):
-    """ Customize default User model """
-    USER_TYPE_CHOICES = (
-      (1, 'doctor'),
-      (2, 'patient'),
-      (3, 'admin'),
-      (4, 'subadmin'),
-    )
-    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, null=True, blank=True)
-    username = None
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['mobile_number', ]
-    email = models.EmailField(unique=True)
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']
+    is_admin = models.BooleanField(default=False)
+    is_sub = models.BooleanField(default=False)
+    is_doctor = models.BooleanField(default=False, null=True)
+    token = models.CharField(max_length=150, null=True)
     phone_regex = RegexValidator(
         regex=r'^(?:\+88|88)?(01[3-9]\d{8})$')
     mobile_number = models.CharField(max_length=11, validators=[phone_regex], unique=True, help_text="Phone number must be entered in the format: '+8801XXXXXXXXX'.", null=True, blank=True) # noqa
@@ -32,115 +52,17 @@ class User(AbstractUser):
     invoice_logo = models.ImageField(upload_to='media/', null=True, blank=True)
     contact_number = models.CharField(max_length=11, null=True, blank=True)
     footer_message = models.CharField(max_length=80, null=True, blank=True)
-    is_verified = models.BooleanField(
-        _('verified'),
-        default=False,
-        help_text=_(
-            'Designates whether this user has been verified. '
-            'Un-verified users cannot log in.'
-        ),
-    )
-    is_doctor = models.BooleanField(
-        _('doctor'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as doctor.'
-        ),
-    )
-    is_patient = models.BooleanField(
-        _('patient'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as patient.'
-        ),
-    )
-    is_admin = models.BooleanField(
-        _('admin'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as admin.'
-        ),
-    )
-    is_subadmin = models.BooleanField(
-        _('subadmin'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as subadmin.'
-        ),
-    )
-    is_hr = models.BooleanField(
-        _('hr'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as Human resources (HR).'
-        ),
-    )
-    is_accountant = models.BooleanField(
-        _('accountant'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as accountant.'
-        ),
-    )
-    is_employee = models.BooleanField(
-        _('employee'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as employee.'
-        ),
-    )
-    is_nurse = models.BooleanField(
-        _('nurse'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as nurse.'
-        ),
-    )
-    is_pharmascist = models.BooleanField(
-        _('pharmascist'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as pharmascist.'
-        ),
-    )
-    is_laboratoriest = models.BooleanField(
-        _('laboratoriest'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as laboratoriest.'
-        ),
-    )
-    is_receptionist = models.BooleanField(
-        _('receptionist'),
-        default=False,
-        help_text=_(
-            'Designates whether this user should be treated as receptionist.'
-        ),
-    )
-    otp = models.SmallIntegerField(
-        help_text='One Time Password',
-        null=True, blank=True
-    )
-    token = models.CharField(
-        verbose_name=_('Token'),
-        max_length=100,
-        unique=True,
-        null=True, blank=True, editable=False,
-        help_text='Token for authentication'
-    )
-    ip_address = models.GenericIPAddressField(
-        verbose_name=_('IP Address'),
-        help_text='IP Address',
-        blank=True, null=True
-    )
-    password_changes_datatime = models.DateTimeField(
-        verbose_name=_('Password changes datatime'),
-        blank=True,
-        null=True,
-    )
-    created_at = models.DateTimeField(default=now, editable=False)
 
-    objects = UserManager()
+    obj = MyUserManager()
 
-    def __str__(self) -> str:
-        return self.email
+
+
+class Sadmin(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+
+class Subadmin(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
+    create_date = models.DateTimeField(auto_now_add=True)

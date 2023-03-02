@@ -30,9 +30,9 @@ class Patient(BaseModel):
     blood_group = models.CharField(max_length=5, choices=BLOOD_CHOICES, null=True, blank=True)
     patient_age = models.IntegerField(null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True, blank=True)
-    grand_total = models.DecimalField(max_digits=5, decimal_places=2, default='0.00', null=True, blank=True)
-    paid_amount = models.DecimalField(max_digits=5, decimal_places=2, default='0.00', null=True, blank=True)
-    due = models.DecimalField(max_digits=5, decimal_places=2, default='0.00', null=True, blank=True)
+    grand_total = models.DecimalField(max_digits=15, decimal_places=2, default='0.00', null=True, blank=True)
+    paid_amount = models.DecimalField(max_digits=15, decimal_places=2, default='0.00', null=True, blank=True)
+    due = models.DecimalField(max_digits=15, decimal_places=2, default='0.00', null=True, blank=True)
     discount = models.IntegerField(default=0)
     PAYMENT_TYPE = (
         ('cash', 'Cash'),

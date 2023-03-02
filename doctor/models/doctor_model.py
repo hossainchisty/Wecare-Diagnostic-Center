@@ -5,10 +5,13 @@ from django.db import models
 
 from department.models import Department
 from utility.common_fields import BaseModel
+from authenticator.models import User
 
 
 class Doctor(BaseModel):
     """ Doctor model for storing doctor data """
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE)
     unique_id = models.CharField(max_length=10, null=True, blank=True, editable=False)
     name = models.CharField(max_length=30)
     avatar = models.ImageField(upload_to='media/', default='static/img/default.jpg', null=True, blank=True)

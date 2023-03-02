@@ -2,80 +2,84 @@
 <html lang="en">
 {% load static %} 
 {% load cache %}
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- SEO Meta Tags Start -->
-    <meta name="author" content="Hossain Chisty(Backend Developer)" />
-    <meta property="og:title" content="Pharmacare-Pharmacy-Management" />
-    <meta
-      name="description"
-      content="The pharmacy management software ensures a well-organized functioning, modern invoicing system, revenue management, inventory track mechanism, and boosting up your business."
-    />
-    <meta
-      name="keywords"
-      content="accounts, customers, products, orders, invoices, expense, purchase, report, return, damage, sales, service, stock, suppliers"
-    />
-    <link rel="canonical" href="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="Pharmacare pharmacy management software" />
-    <!-- SEO Meta Tags End -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <!-- SEO Meta Tags Start -->
+  <meta name="author" content="Hossain Chisty(Backend Developer)" />
+  <meta property="og:title" content="Pharmacare-Pharmacy-Management" />
+  <meta
+    name="description"
+    content="The pharmacy management software ensures a well-organized functioning, modern invoicing system, revenue management, inventory track mechanism, and boosting up your business."
+  />
+  <meta
+    name="keywords"
+    content="accounts, customers, products, orders, invoices, expense, purchase, report, return, damage, sales, service, stock, suppliers"
+  />
+  <link rel="canonical" href="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:site_name" content="Pharmacare pharmacy management software" />
+  <!-- SEO Meta Tags End -->
 
-    <!-- Favicon Icon Start -->
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="{% static 'img/favicon.png' %}"
-    />
-    <!-- Favicon Icon End -->
+  <!-- Favicon Icon Start -->
+  <link
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="{% static 'img/favicon.png' %}"
+  />
+  <!-- Favicon Icon End -->
 
-    <!-- Title -->
-    <title>
-      {% block title %} Dashboard {% endblock title %}- Diagnostic 🏥
-    </title>
+  <!-- Title -->
+  <title>
+    {% block title %} Dashboard {% endblock title %}- Diagnostic 🏥
+  </title>
 
-    <!-- Fontawesome CDN -->
-    <link
-      href="{% static 'vendor/fontawesome-free/css/all.min.css' %}"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Google Font CDN -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-      rel="stylesheet"
-    />
+  <!-- Fontawesome CDN -->
+  <link
+    href="{% static 'vendor/fontawesome-free/css/all.min.css' %}"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <!-- Google Font CDN -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet"
+  />
 
-    <!-- Tailwind CDN -->
-    <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+  <!-- Tailwind CDN -->
+  <link
+    href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+    rel="stylesheet"
+  />
 
-    <!-- React CDN -->
-    <script
-      src="https://unpkg.com/react@17/umd/react.development.js"
-      crossorigin
-    ></script>
-    <script
-      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
-      crossorigin
-    ></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  {% comment %} Using Select2 from a CDN {% endcomment %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <!-- CSS Files Start -->
-    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/asteriskStyle.css' %}" rel="stylesheet" />
-    <!-- CSS Files End -->
-  </head>
 
+  <!-- React CDN -->
+  <script
+    src="https://unpkg.com/react@17/umd/react.development.js"
+    crossorigin
+  ></script>
+  <script
+    src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    crossorigin
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+
+  <!-- CSS Files Start -->
+  <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/asteriskStyle.css' %}" rel="stylesheet" />
+  <!-- CSS Files End -->
+</head>
   <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -308,5 +312,18 @@
     <!-- Page level custom scripts -->
     <script src="{% static 'js/demo/chart-bar-demo.js' %}"></script>
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+    <script>
+      $(document).ready(function() {
+          $('.js-example-basic-single').select2();
+      });
+    </script>
+
+    {% block js %} {% endblock js %}
+
+  
   </body>
 </html>

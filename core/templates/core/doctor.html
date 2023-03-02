@@ -1,0 +1,133 @@
+{% extends 'core/_base.html' %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 bg-green-100 opacity-100 p-4">
+        <h4 class="text-gray-800 font-bold text-center">
+            <p id="greeting"></p>
+        </h4>
+
+        {% comment %} <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> {% endcomment %}
+    </div>
+
+        <div class="row">
+        <!-- Upper -->
+       
+
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Sales Overview Area Chart Start -->
+        {% include 'core/graph/SalesOverview.html' %}
+        <!-- Sales Overview Area Chart End -->
+
+        <!-- Expense Pie Chart Start -->
+        {% include 'core/graph/ExpenseSummary.html' %}
+        <!-- Expense Pie Chart End -->
+
+        <!-- Today Status - Start -->
+        {% comment %} <div class="flex space-x-4">
+            <div class="justify-between rounded-xl mt-4 p-4 bg-white shadow-lg">
+                <h1 class="text-xl font-bold text-gray-800 mt-4">Today’s Status</h1>
+                <div class="flex justify-between space-x-4 text-center mt-6">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-dark text-uppercase mb-1"
+                            >
+                                <a class="hover:no-underline" href="">Total Doctor</a>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                78
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-dark text-uppercase mb-1"
+                            >
+                                <a class="hover:no-underline" href="">Total Doctor</a>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                78
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-dark text-uppercase mb-1"
+                            >
+                                <a class="hover:no-underline" href="">Total Doctor</a>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                78
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                            <div
+                                class="text-xs font-weight-bold text-dark text-uppercase mb-1"
+                            >
+                                <a class="hover:no-underline" href="">Total Doctor</a>
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                78
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        <!-- Today Status - end -->
+
+        <!-- Content Row -->
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+{% include "core/footer.html" %}
+<!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<script type="text/babel">
+    class Greeting extends React.Component {
+        render() {
+            const currentTime = new Date().getHours();
+            return (
+                <>
+                    {{ request.user.title }}, Good{" "}
+                    {currentTime >= 12
+                        ? currentTime >= 16
+                            ? "Evening🌇"
+                            : "Afternoon🌆"
+                        : "Morning​​🌅"}
+                </>
+            );
+        }
+    }
+
+    ReactDOM.render(<Greeting />, document.getElementById("greeting"));
+</script>
+
+{% endblock body %}

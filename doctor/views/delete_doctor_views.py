@@ -8,5 +8,5 @@ def DeleteDoctor(request, pk):
     ''' Delete an doctor object '''
     if request.method == "POST":
         doctors = Doctor.objects.filter(id=pk)
-        doctors.Delete()
+        doctors.delete()
         return redirect('doctor_list')

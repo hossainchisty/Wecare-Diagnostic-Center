@@ -72,7 +72,7 @@
                                 </button>
                                 <button class="btn-sm">
                                     <a class="text-white hover:no-underline py-1 px-3 text-white rounded-lg bg-red-500 block md:inline-block"
-                                        data-toggle="modal" data-target="#deleteModal" href="{% url 'delete_lab_test' item.id %}">
+                                        data-toggle="modal" data-target="#deleteModal" href="#">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </button>
@@ -83,7 +83,7 @@
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                        <form action="{% url 'delete_lab_test' item.id %}" method="POST">
+                        <form action="#" method="POST">
                             <!-- Security token -->
                             {% csrf_token %}
                             <div class="modal-content">

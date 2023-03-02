@@ -1,7 +1,7 @@
 # Basic Lib Import
 from django.forms import ModelForm
 from django import forms
-from laboratory.models import Lab
+from laboratory.models.lab_models import Lab
 
 
 class LabForm(ModelForm):

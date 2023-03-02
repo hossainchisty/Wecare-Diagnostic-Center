@@ -30,6 +30,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Authentication Model
+AUTH_USER_MODEL = 'authenticator.User'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,8 +53,8 @@ INSTALLED_APPS += [
     'patient.apps.PatientConfig',
     'schedule.apps.ScheduleConfig',
     'expense.apps.ExpenseConfig',
-    'report.apps.ReportConfig',
     'income.apps.IncomeConfig',
+    'report.apps.ReportConfig',
     'laboratory.apps.LaboratoryConfig',
     'department.apps.DepartmentConfig',
     'appointment.apps.AppointmentConfig',
