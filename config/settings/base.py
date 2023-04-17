@@ -109,7 +109,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'diagnostic-db.sqlite3',
+        'NAME': BASE_DIR / 'wecare-diagnostic-db.sqlite3',
     }
 }
 
@@ -177,6 +177,3 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440  # i.e. 2.5 MB
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Default User
-
-AUTH_USER_MODEL = 'authenticator.User'
