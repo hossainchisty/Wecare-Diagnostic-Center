@@ -1,6 +1,6 @@
 """
-Title: SME Inventory Management.
-Description: .
+Title: Wecare Diagnostic Center
+Description: Hospital Management System is mainly a system that can help to maintain any hospital activities properly and easily. Moreover, the hospital management system can be used as clinical software. It helps to keep records and monitor the activities of any hospital.
 Author: Hossain Chisty(Backend Developer)
 Contact: hossain.chisty11@gmail.com
 Github: https://github.com/hossainchisty
@@ -59,9 +59,6 @@ INSTALLED_APPS += [
     'department.apps.DepartmentConfig',
     'appointment.apps.AppointmentConfig',
     'authenticator.apps.AuthenticatorConfig',
-
-    # 'profiles.apps.ProfilesConfig',
-    # 'settings.apps.SettingsConfig',
 ]
 
 # Third party Module
@@ -109,7 +106,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'wecare-diagnostic-db.sqlite3',
+        'NAME': BASE_DIR / 'diagnostic-db.sqlite3',
     }
 }
 

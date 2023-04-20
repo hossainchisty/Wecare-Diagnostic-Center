@@ -13,9 +13,6 @@ class DiagnosticIncome(BaseModel):
     sources = models.CharField(max_length=200)
 
     class Meta:
-        ordering = [
-            '-created_at'
-        ]
         verbose_name = 'Company Income'
         verbose_name_plural = 'Company Income'
 
