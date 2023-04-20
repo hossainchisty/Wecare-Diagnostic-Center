@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 
 from doctor.models.doctor_profit_model import DoctorProfit
-from income.models import DiagnosticIncome
+from income.models import CompanyIncome
 from laboratory.forms.lab_form import LabForm
 from laboratory.models import Reportlist
 from doctor.models.doctor_model import Doctor
@@ -51,7 +51,7 @@ def lab_bill_pay(request):
         reportTestinglist.save()
      
 
-    addDiagnosticAmount = DiagnosticIncome.objects.create(
+    addDiagnosticAmount = CompanyIncome.objects.create(
                     lab=lab,
                     amount=diagnosticProfit,
                     description=f'The revenue estimated was {diagnosticProfit} Taka.',
@@ -331,7 +331,7 @@ class CreateLabView(View):
                 form.instance.total = total
                 formObject = form.save()
                 ''' Adding diagnostic total profit from tests '''
-                addDiagnosticAmount = DiagnosticIncome.objects.create(
+                addDiagnosticAmount = CompanyIncome.objects.create(
                     amount=diagnosticProfit,
                     description=f'The revenue estimated was {diagnosticProfit} Taka.',
                     sources='The revenue generated from clinical laboratory services.',
