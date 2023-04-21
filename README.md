@@ -35,4 +35,8 @@ The Lab Test module enables you to manage all lab reports.
 The Reports section allows you to generate date-to-date reports for all your financial activities. It also features a User Activity report, where you can view user-based financial reporting, such as the amount of cash collected by each accountant and receptionist. You can also check each doctor's commission, as well as birth, operation, and expire records. Finally, you can generate daily, monthly, and yearly payment and expense reports, and many more.
 
 
-![Demo](https://user-images.githubusercontent.com/62835101/233303390-a423864f-c5c4-4b6a-80ec-061b2cdd589c.png)
+
+
+https://user-images.githubusercontent.com/62835101/233542910-bfb18079-f137-4c68-9943-95e74521c50c.mp4
+
+
